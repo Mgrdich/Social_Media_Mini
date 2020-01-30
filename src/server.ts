@@ -1,6 +1,7 @@
 import * as express from 'express';
 import * as mongoose from "mongoose";
-import {MONGODB_URI,MONGOOSE_OPTIONS} from "./config/keys";
+import * as bodyParser from "body-parser";
+import {MONGODB_URI, MONGOOSE_OPTIONS} from "./config/keys";
 import users from "./routes/users";
 import posts from "./routes/profiles";
 import profiles from "./routes/users";
@@ -8,15 +9,21 @@ import profiles from "./routes/users";
 const app = express();
 
 
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
+
+app.use(bodyParser.json());
+
 //Routes
-app.use('/users',users);
-app.use('/posts',posts);
-app.use('/profile',profiles);
+app.use('/users', users);
+app.use('/posts', posts);
+app.use('/profile', profiles);
 
 
 const port: number | string = process.env.PORT || 8080;
 
-mongoose.connect(MONGODB_URI,MONGOOSE_OPTIONS)
+mongoose.connect(MONGODB_URI, MONGOOSE_OPTIONS)
     .then(function () {
         app.listen(port);
     }).catch(function (err) {
