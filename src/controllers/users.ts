@@ -1,9 +1,11 @@
 import {Request, Response, NextFunction} from 'express';
 import {User} from '../models/User';
 import {IUser} from "../interfaces/models";
+import * as jwt from 'jsonwebtoken';
 import * as bcrypt from 'bcryptjs';
 import * as gravatar from 'gravatar';
-import {DocumentQuery} from "mongoose";
+import {SECRET_KEY} from "../config/keys";
+
 
 async function register(req: Request, res: Response, next: NextFunction) {
     const {email, name, password} = req.body;
@@ -42,7 +44,13 @@ async function login(req: Request, res: Response, next: NextFunction) {
         if (!isMatch) {
             return res.status(400).json({email: 'Email Already Exist'})
         }
-        res.status(200).json({msg: 'Success'})
+        const payload: any = {
+            id: user.id,
+            name: user.name,
+            avatar: user.avatar,
+        };
+        const token: string = await jwt.sign(payload, SECRET_KEY, {expiresIn: 3600});
+        res.status(200).json({success: true, token: `Bearer ${token}`});
 
     } catch (err) {
 
@@ -51,4 +59,9 @@ async function login(req: Request, res: Response, next: NextFunction) {
 }
 
 
-export {register, login}
+async function currentUser(req: Request, res: Response, next: NextFunction) {
+    res.status(200).json({'key': 'ssssssssss'});
+}
+
+
+export {register, login, currentUser}

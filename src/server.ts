@@ -1,6 +1,8 @@
-import * as express from 'express';
+import * as express from "express";
 import * as mongoose from "mongoose";
 import * as bodyParser from "body-parser";
+import * as passport from "passport";
+import passportConfig from "./config/passport";
 import {MONGODB_URI, MONGOOSE_OPTIONS} from "./config/keys";
 import users from "./routes/users";
 import posts from "./routes/profiles";
@@ -15,7 +17,14 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 
-//Routes
+// Passport middleware
+app.use(passport.initialize());
+
+// Passport Config
+passportConfig(passport);
+
+
+// Routes
 app.use('/users', users);
 app.use('/posts', posts);
 app.use('/profile', profiles);
