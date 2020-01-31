@@ -36,13 +36,13 @@ async function login(req: Request, res: Response, next: NextFunction) {
     try {
         const user: any = await User.findOne({email});
         if (!user) {
-            return res.status(400).json({email: 'Email Already Exist'})
+            return res.status(400).json({email: 'no users found'})
         }
 
         let isMatch: boolean = await bcrypt.compare(password, user.password);
 
         if (!isMatch) {
-            return res.status(400).json({email: 'Email Already Exist'})
+            return res.status(400).json({email: 'Wrong Auth'})
         }
         const payload: any = {
             id: user.id,
@@ -60,7 +60,7 @@ async function login(req: Request, res: Response, next: NextFunction) {
 
 
 async function currentUser(req: Request, res: Response, next: NextFunction) {
-    res.status(200).json({'key': 'ssssssssss'});
+    res.status(200).json(req["user"]);
 }
 
 

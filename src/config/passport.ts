@@ -12,8 +12,17 @@ const opts: any = {};
 opts.jwtFromRequest = ExtractJwtStrategy.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = SECRET_KEY;
 
-export default (passport) => {
-    passport.use(new JwtStrategy(opts,(jwt_payload,done)=>{
-        console.log(jwt_payload);
+export default function (passport) {
+    passport.use(new JwtStrategy(opts, async function (jwt_payload, done) {
+        try {
+            const user = await User.findById(jwt_payload.id);
+            if (user) {
+                return done(null, user);
+            }
+            done(null, false);
+        } catch (e) {
+            console.log(e);
+        }
+
     }));
 }
