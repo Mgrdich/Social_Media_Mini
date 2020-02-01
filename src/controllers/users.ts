@@ -9,7 +9,7 @@ import {SECRET_KEY} from "../config/keys";
 import {errorCatcher, errorThrower} from "../utilities/functions";
 
 
-async function register(req: Request, res: Response, next: NextFunction) {
+async function register(req: Request, res: Response, next: NextFunction):Promise<any> {
     const {email, name, password} = req.body;
     try {
         const errors = validationResult(req);
@@ -33,8 +33,9 @@ async function register(req: Request, res: Response, next: NextFunction) {
 }
 
 
-async function login(req: Request, res: Response, next: NextFunction) {
+async function login(req: Request, res: Response, next: NextFunction):Promise<any> {
     const {email, password} = req.body;
+    console.log(email.length);
     try {
         const user: any = await User.findOne({email});
         if (!user) {
@@ -61,7 +62,7 @@ async function login(req: Request, res: Response, next: NextFunction) {
 }
 
 
-async function currentUser(req: Request, res: Response, next: NextFunction) {
+async function currentUser(req: Request, res: Response, next: NextFunction):Promise<any> {
     res.status(200).json(req["user"]);
 }
 

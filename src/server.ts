@@ -6,8 +6,8 @@ import passportConfig from "./config/passport";
 import {MONGODB_URI, MONGOOSE_OPTIONS} from "./config/keys";
 import {NextFunction, Request, Response} from "express";
 import users from "./routes/users";
-import posts from "./routes/profiles";
-import profiles from "./routes/users";
+import posts from "./routes/profile";
+import profile from "./routes/profile";
 import {ImyError} from "./interfaces/General";
 
 const app = express();
@@ -29,10 +29,10 @@ passportConfig(passport);
 // Routes
 app.use('/users', users);
 app.use('/posts', posts);
-app.use('/profile', profiles);
+app.use('/profile', profile);
 
 //errors
-app.use(function (err: ImyError, req: Request, res: Response, next: NextFunction) { //TODO check out the interface for error message
+app.use(function (err: ImyError, req: Request, res: Response, next: NextFunction) {
     const status: number = err.statusCode || 500;
     const message: string = err.message;
     const data = err.data;

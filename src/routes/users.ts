@@ -1,10 +1,8 @@
 import * as express from "express";
 import {body} from "express-validator";
 import {register, login, currentUser} from "../controllers/users";
-import * as passport from "passport";
 import {User} from "../models/User";
-import {ExtractJwt} from "passport-jwt";
-import fromBodyField = ExtractJwt.fromBodyField;
+import {isAuth} from "../utilities/middlewares";
 
 const router = express.Router();
 
@@ -31,12 +29,7 @@ router.put("/register", [
 
 router.post("/login", login);
 
-
-//TODO convert this to a custom middleware
-router.get("/current",
-    passport.authenticate("jwt", {
-        session: false
-    }), currentUser);
+router.get("/current", isAuth(), currentUser);
 
 
 export default router;
