@@ -1,7 +1,7 @@
 import {NextFunction, Request, Response} from "express";
 import {User} from "../models/User";
 import {Profile} from "../models/Profile";
-import {IProfile} from "../interfaces/models";
+import {IDocProfile, IProfile} from "../interfaces/models";
 import {errorCatcher, errorThrower} from "../utilities/functions";
 
 async function getProfile(req: Request, res: Response, next: NextFunction): Promise<any> {
@@ -26,6 +26,7 @@ async function createProfile(req: Request, res: Response, next: NextFunction): P
     const profileFields: IProfile = {
         user: req.user["_id"],
         handle,
+        status,
         skills: skills.split(', ')
     };
     if (company) {
@@ -39,9 +40,6 @@ async function createProfile(req: Request, res: Response, next: NextFunction): P
     }
     if (bio) {
         profileFields.bio = bio;
-    }
-    if (status) {
-        profileFields.status = status;
     }
     if (githubUserName) {
         profileFields.githubUserName = githubUserName;
@@ -64,6 +62,27 @@ async function createProfile(req: Request, res: Response, next: NextFunction): P
         profileFields.social.instagram = instagram;
     }
 
+    try {
+        // const profile:IDocProfile = await Profile.findOne({user:req.user["_id"]});
+        const profile: IDocProfile = await Profile.findOneAndUpdate({user: req.user["_id"]}, {$set: profileFields});
+
+        if (!profile) { //Create
+
+            //Checking if the handle exist
+            let handleProfile: IDocProfile = await Profile.findOne({handle});
+            if (handleProfile) {
+                errorThrower("Handle does exist", 422);
+            }
+
+            let newProfile: IDocProfile = await new Profile(profileFields).save();
+            return res.status(200).json(newProfile);
+        }
+
+        res.status(200).json(profile);
+
+    } catch (err) {
+        errorCatcher(next, err);
+    }
 
 }
 

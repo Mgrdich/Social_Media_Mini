@@ -17,10 +17,10 @@ export interface IProfile {
     user: IDocUser["_id"];
     handle: string;
     skills: Array<string>;
+    status: string;
     company?: string;
     website?: string;
     location?: string;
-    status?: string;
     bio?: string;
     githubUserName?: string;
     date?: Date;
