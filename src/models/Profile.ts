@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
 import {Schema} from "mongoose";
-import {IProfile} from "../interfaces/models";
+import {IDocProfile} from "../interfaces/models";
 
 // Create Schema
 const ProfileSchema = new Schema({
@@ -118,6 +118,6 @@ const ProfileSchema = new Schema({
     }
 });
 
-const Profile = mongoose.model<IProfile>('profile', ProfileSchema);
+const Profile = mongoose.model<IDocProfile>('profile', ProfileSchema);
 
 export {Profile};

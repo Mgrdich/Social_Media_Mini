@@ -1,8 +1,8 @@
 import * as mongoose from 'mongoose';
 import {Schema} from "mongoose";
-import {IUser} from "../interfaces/models";
+import {IDocUser} from "../interfaces/models";
 
-const userSchema:Schema = new Schema({
+const userSchema: Schema = new Schema({
     name: {
         type: String,
         required: true
@@ -24,6 +24,6 @@ const userSchema:Schema = new Schema({
     }
 });
 
-const User = mongoose.model<IUser>('User', userSchema);
+const User = mongoose.model<IDocUser>('User', userSchema);
 
 export {User};

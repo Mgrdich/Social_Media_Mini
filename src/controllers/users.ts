@@ -1,6 +1,6 @@
 import {Request, Response, NextFunction} from 'express';
 import {User} from '../models/User';
-import {IUser} from "../interfaces/models";
+import {IDocUser} from "../interfaces/models";
 import {validationResult} from "express-validator";
 import * as jwt from 'jsonwebtoken';
 import * as bcrypt from 'bcryptjs';
@@ -21,7 +21,7 @@ async function register(req: Request, res: Response, next: NextFunction):Promise
             r: 'pg',//Rating
             d: 'm' //Default
         });
-        const newUser: IUser = new User({email, name, avatar, password});
+        const newUser: IDocUser = new User({email, name, avatar, password});
 
         const salt = await bcrypt.genSalt(10);
         newUser.password = await bcrypt.hash(newUser.password, salt);

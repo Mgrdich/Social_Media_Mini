@@ -1,7 +1,7 @@
 import {Document} from 'mongoose';
 import exp from "constants";
 
-export interface IUser extends Document {
+export interface IUser {
     name: string;
     email: string;
     password: string;
@@ -9,8 +9,12 @@ export interface IUser extends Document {
     date?: Date;
 }
 
-export interface IProfile extends Document {
-    user: IUser["_id"];
+//Mongoose modal
+export interface IDocUser  extends Document,IUser  { }
+
+
+export interface IProfile {
+    user: IDocUser["_id"];
     handle: string;
     skills: Array<string>;
     company?: string;
@@ -45,4 +49,8 @@ export interface IProfile extends Document {
         current?: boolean;
         description?: string;
     }>;
+
 }
+
+//Mongoose modal
+export interface IDocProfile extends Document,IProfile { }
