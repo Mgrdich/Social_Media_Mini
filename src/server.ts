@@ -4,9 +4,11 @@ import * as bodyParser from "body-parser";
 import * as passport from "passport";
 import passportConfig from "./config/passport";
 import {MONGODB_URI, MONGOOSE_OPTIONS} from "./config/keys";
+import {NextFunction, Request, Response} from "express";
 import users from "./routes/users";
 import posts from "./routes/profiles";
 import profiles from "./routes/users";
+import {ImyError} from "./interfaces/General";
 
 const app = express();
 
@@ -28,6 +30,14 @@ passportConfig(passport);
 app.use('/users', users);
 app.use('/posts', posts);
 app.use('/profile', profiles);
+
+//errors
+app.use(function (err: ImyError, req: Request, res: Response, next: NextFunction) { //TODO check out the interface for error message
+    const status: number = err.statusCode || 500;
+    const message: string = err.message;
+    const data = err.data;
+    res.status(status).json({message, data});
+});
 
 
 const port: number | string = process.env.PORT || 8080;

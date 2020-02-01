@@ -1,20 +1,22 @@
 import {Request, Response, NextFunction} from 'express';
 import {User} from '../models/User';
 import {IUser} from "../interfaces/models";
+import {validationResult} from "express-validator";
 import * as jwt from 'jsonwebtoken';
 import * as bcrypt from 'bcryptjs';
 import * as gravatar from 'gravatar';
 import {SECRET_KEY} from "../config/keys";
+import {errorCatcher, errorThrower} from "../utilities/functions";
 
 
 async function register(req: Request, res: Response, next: NextFunction) {
     const {email, name, password} = req.body;
     try {
-        const user = await User.findOne({email});
-        if (user) {  //TODO replace by the middleware
-            return res.status(400).json({email: 'Email Already Exist'})
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            errorThrower("Validation Failed", 422, errors.array());
         }
-        const avatar = gravatar.url(email, {
+       const avatar = gravatar.url(email, {
             s: '200',//Size
             r: 'pg',//Rating
             d: 'm' //Default
@@ -26,7 +28,7 @@ async function register(req: Request, res: Response, next: NextFunction) {
         let savedUser: any = await newUser.save();
         res.status(200).json({...savedUser._doc});
     } catch (err) {
-        console.log(err);
+        errorCatcher(next, err);
     }
 }
 
