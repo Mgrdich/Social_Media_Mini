@@ -7,7 +7,8 @@ import {
     getProfile,
     getProfileByHandle,
     getProfileByUser,
-    createExperience
+    createExperience,
+    createEducation, deleteExperience, deleteEducation
 } from "../controllers/profile";
 
 const router = express.Router();
@@ -33,10 +34,20 @@ router.post('/', isAuth(), [
         .isURL(),
 ], createProfile);
 
+//TODO Validation for the date (from,to ---> (optional))
 router.post('/experience', isAuth(), [
     body(['title', 'company', 'from'])
         .notEmpty(),
 ], createExperience);
+//TODO Validation for the date (from,to ---> (optional))
+router.post('/education', isAuth(), [
+    body(['school', 'degree', 'fieldOfStudy', 'from'])
+        .notEmpty()
+], createEducation);
+
+router.delete('/experience/:Id', isAuth(), deleteExperience);
+
+router.delete('/education/:Id', isAuth(), deleteEducation);
 
 
 export default router;

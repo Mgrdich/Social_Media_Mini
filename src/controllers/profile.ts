@@ -4,7 +4,7 @@ import {Profile} from "../models/Profile";
 import {IDocProfile, IProfile} from "../interfaces/models";
 import {errorCatcher, errorThrower} from "../utilities/functions";
 import {validationResult} from "express-validator";
-import {IExperience} from "../interfaces/General";
+import {IEducation, IExperience} from "../interfaces/General";
 
 async function getProfile(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
@@ -149,8 +149,6 @@ async function createExperience(req: Request, res: Response, next: NextFunction)
             errorCatcher(next, err);
         }
     }
-
-    console.log(req.body);
     const {
         title,
         company,
@@ -182,4 +180,82 @@ async function createExperience(req: Request, res: Response, next: NextFunction)
     }
 }
 
-export {getProfile, createProfile, getProfileByHandle, getProfileByUser, getAllProfiles, createExperience};
+async function createEducation(req: Request, res: Response, next: NextFunction): Promise<any> {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        try {
+            errorThrower("Validation Failed", 422, errors.mapped());
+        } catch (err) {
+            errorCatcher(next, err);
+        }
+    }
+    const {
+        school,
+        degree,
+        fieldOfStudy,
+        from,
+        to,
+        current,
+        description
+    } = req.body;
+    try {
+        const profile: IDocProfile = await Profile.findOne({user: req.user["_id"]});
+        if (!profile) {
+            errorThrower("No such profile exist", 422);
+        }
+        const education: IEducation = {
+            school,
+            degree,
+            fieldOfStudy,
+            from,
+            to,
+            current,
+            description
+        };
+        profile.education.unshift(education);
+        let savedProfile: IDocProfile = await profile.save();
+        res.status(200).json(savedProfile);
+    } catch (err) {
+        errorCatcher(next, err);
+    }
+
+}
+
+async function deleteExperience(req: Request, res: Response, next: NextFunction): Promise<any> {
+    try {
+        const updatedProfile: IDocProfile = await Profile
+            .update({user: req.user["_id"]}, {$pull: {experience: {_id: req.params.Id}}}, {multi: true,new:true});
+        if (!updatedProfile) {
+            errorThrower("Profile not found", 422);
+        }
+        res.status(200).json(updatedProfile);
+    } catch (err) {
+        errorCatcher(next, err);
+    }
+}
+
+async function deleteEducation(req: Request, res: Response, next: NextFunction): Promise<any> {
+    try {
+        const updatedProfile: IDocProfile = await Profile
+            .update({user: req.user["_id"]}, {$pull: {education: {_id: req.params.Id}}}, {multi: true,new:true});
+        if (!updatedProfile) {
+            errorThrower("Profile is not found", 422);
+        }
+        res.status(200).json(updatedProfile);
+    } catch (err) {
+        errorCatcher(next, err);
+    }
+
+}
+
+export {
+    getProfile,
+    createProfile,
+    getProfileByHandle,
+    getProfileByUser,
+    getAllProfiles,
+    createExperience,
+    createEducation,
+    deleteExperience,
+    deleteEducation
+};
