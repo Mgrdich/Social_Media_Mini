@@ -1,6 +1,7 @@
 import {NextFunction} from "express";
+import {IValidation} from "../interfaces/General";
 
-const errorThrower = function (errMessage: string, statusCode: number,data?:Array<any>) {
+const errorThrower = function (errMessage: string, statusCode: number,data?:any) {
     const error = new Error(errMessage);
     error["statusCode"] = statusCode;
     error["data"] = data;

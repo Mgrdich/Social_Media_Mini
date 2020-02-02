@@ -14,7 +14,7 @@ async function register(req: Request, res: Response, next: NextFunction):Promise
     try {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            errorThrower("Validation Failed", 422, errors.array());
+            errorThrower("Validation Failed", 422, errors.mapped());
         }
        const avatar = gravatar.url(email, {
             s: '200',//Size

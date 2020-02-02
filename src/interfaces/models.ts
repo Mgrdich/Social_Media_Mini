@@ -1,5 +1,6 @@
 import {Document} from 'mongoose';
 import exp from "constants";
+import {IEducation, IExperience} from "./General";
 
 export interface IUser {
     name: string;
@@ -31,25 +32,8 @@ export interface IProfile {
         linkedin?: string;
         instagram?: string;
     }
-    education?: Array<{
-        school: string;
-        degree: string;
-        fieldOfStudy: string;
-        from: Date;
-        to?: Date;
-        current?: boolean;
-        description?: string;
-    }>;
-    experience?: Array<{
-        title: string;
-        company: string;
-        from: Date;
-        to?: Date;
-        location?: string;
-        current?: boolean;
-        description?: string;
-    }>;
-
+    education?: Array<IEducation>;
+    experience?: Array<IExperience>;
 }
 
 //Mongoose modal
