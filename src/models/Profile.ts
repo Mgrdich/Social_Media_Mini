@@ -6,7 +6,7 @@ import {IDocProfile} from "../interfaces/models";
 const ProfileSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
-        ref: 'users'
+        ref: 'User'
     },
     handle: {
         type: String,

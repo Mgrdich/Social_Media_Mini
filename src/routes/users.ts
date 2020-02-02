@@ -10,6 +10,7 @@ const router = express.Router();
 router.put("/register", [
     body("email")
         .isEmail()
+        .bail()
         .withMessage("Enter a valid Email")
         .custom(function(value, {req})  {
             return User.findOne({email: value}).then(function(userDoc) {
@@ -23,8 +24,7 @@ router.put("/register", [
         .isLength({min: 5}),
     body('name')
         .trim()
-        .not()
-        .isEmpty(),
+        .notEmpty(),
 ], register);
 
 router.post("/login", login);
