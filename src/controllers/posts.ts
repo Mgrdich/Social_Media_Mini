@@ -58,7 +58,7 @@ async function deletePost(req: Request, res: Response, next: NextFunction): Prom
     try {
         const post: IDocPost = await Post.findById(req.params.Id);
 
-        if (post.user.toString() !== req.user["_id"]) {
+        if (post.user.toString() !== req.user["_id"].toString()) {
             errorThrower("User not Authorized", 401);
         }
 
@@ -70,4 +70,31 @@ async function deletePost(req: Request, res: Response, next: NextFunction): Prom
 
 }
 
-export {createPost, getPosts, getPost, deletePost};
+async function likePost(req: Request, res: Response, next: NextFunction): Promise<any> {
+    try {
+        const post: IDocPost = await Post.findById(req.params.Id);
+        if (!post) {
+            errorThrower("No post found", 404);
+        }
+        if (post.likes.filter(like => like.user.toString() === req.user["_id"].toString()).length > 0) {
+            errorThrower("Already liked this picture", 422);
+        }
+        post.likes.unshift({user: req.user["_id"]});
+        const likedPost: IDocPost = await post.save();
+        res.status(201).json(likedPost);
+    } catch (err) {
+        errorCatcher(next, err);
+    }
+}
+
+async function unLikePost(req: Request, res: Response, next: NextFunction): Promise<any> {
+    try {
+        const update:any = await Post.updateOne({_id: req.params.Id}, {$pull:{likes:{user:req.user["_id"]}}}, {multi: true});
+        console.log(update);
+        res.status(201).json({success: true});
+    } catch (err) {
+        errorCatcher(next, err);
+    }
+}
+
+export {createPost, getPosts, getPost, deletePost, likePost, unLikePost};
