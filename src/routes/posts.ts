@@ -1,6 +1,15 @@
 import * as express from 'express';
 import {isAuth} from "../utilities/middlewares";
-import {createPost, deletePost, getPost, getPosts, likePost, unLikePost} from "../controllers/posts";
+import {
+    commentPost,
+    createPost,
+    deletePost,
+    getPost,
+    getPosts,
+    likePost,
+    unCommentPost,
+    unLikePost
+} from "../controllers/posts";
 import {body} from 'express-validator';
 
 const router = express.Router();
@@ -19,6 +28,14 @@ router.post('/', isAuth(), [
     body('text')
         .isLength({min: 10, max: 300})
 ], createPost);
+
+//TODO add Validation for the params
+router.post('/comment/:Id',isAuth(),[
+    body('text')
+        .isLength({min: 10, max: 300})
+],commentPost);
+
+router.delete('/comment/:Id/:comment_id',isAuth(),unCommentPost);
 
 
 export default router;

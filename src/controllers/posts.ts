@@ -1,9 +1,9 @@
 import {NextFunction, Request, Response} from "express";
-import {IDocPost, IDocProfile, IPost, IProfile} from "../interfaces/models";
+import {IDocPost, IPost} from "../interfaces/models";
 import {Post} from "../models/Post";
 import {validationResult} from "express-validator";
 import {errorCatcher, errorThrower} from "../utilities/functions";
-import {Profile} from "../models/Profile";
+import {IComment} from "../interfaces/General";
 
 async function createPost(req: Request, res: Response, next: NextFunction): Promise<any> {
 
@@ -89,12 +89,60 @@ async function likePost(req: Request, res: Response, next: NextFunction): Promis
 
 async function unLikePost(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
-        const update:any = await Post.updateOne({_id: req.params.Id}, {$pull:{likes:{user:req.user["_id"]}}}, {multi: true});
-        console.log(update);
+        const update: any = await Post.updateOne({_id: req.params.Id}, {$pull: {likes: {user: req.user["_id"]}}}, {multi: true});
         res.status(201).json({success: true});
     } catch (err) {
         errorCatcher(next, err);
     }
 }
 
-export {createPost, getPosts, getPost, deletePost, likePost, unLikePost};
+async function commentPost(req: Request, res: Response, next: NextFunction): Promise<any> {
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        try {
+            errorThrower("Validation Failed", 422, errors.mapped());
+        } catch (err) {
+            errorCatcher(next, err);
+        }
+    }
+
+    const {text, name, avatar} = req.body;
+    try {
+        const post: IDocPost = await Post.findById(req.params.Id);
+
+        if (!post) {
+            errorThrower("No post found", 422);
+        }
+
+        const newComment: IComment = {
+            text,
+            name,
+            avatar,
+            user: req.user['_id']
+        };
+
+        post.comments.unshift(newComment);
+
+        const commented: IDocPost = await post.save();
+        res.status(201).json(commented);
+    } catch (err) {
+        errorCatcher(next, err);
+    }
+}
+
+async function unCommentPost(req: Request, res: Response, next: NextFunction): Promise<any> {
+    //TODO check out the cases for error handling and also the update result
+    try {
+        const update: any = await Post.updateOne({
+            _id: req.params.Id,
+        }, {$pull: {comments: {_id: req.params.comment_id,user: req.user["_id"]}}}, {multi: true});
+        res.status(201).json({success: true});
+    } catch (err) {
+        errorCatcher(next, err);
+    }
+
+}
+
+
+export {createPost, getPosts, getPost, deletePost, likePost, unLikePost, commentPost, unCommentPost};
