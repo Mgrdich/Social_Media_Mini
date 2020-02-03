@@ -224,7 +224,7 @@ async function createEducation(req: Request, res: Response, next: NextFunction):
 async function deleteExperience(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
         const updatedProfile: IDocProfile = await Profile
-            .update({user: req.user["_id"]}, {$pull: {experience: {_id: req.params.Id}}}, {multi: true,new:true});
+            .updateOne({user: req.user["_id"]}, {$pull: {experience: {_id: req.params.Id}}}, {multi: true,new:true});
         if (!updatedProfile) {
             errorThrower("Profile not found", 422);
         }
@@ -237,7 +237,7 @@ async function deleteExperience(req: Request, res: Response, next: NextFunction)
 async function deleteEducation(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
         const updatedProfile: IDocProfile = await Profile
-            .update({user: req.user["_id"]}, {$pull: {education: {_id: req.params.Id}}}, {multi: true,new:true});
+            .updateOne({user: req.user["_id"]}, {$pull: {education: {_id: req.params.Id}}}, {multi: true,new:true});
         if (!updatedProfile) {
             errorThrower("Profile is not found", 422);
         }

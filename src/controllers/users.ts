@@ -35,7 +35,6 @@ async function register(req: Request, res: Response, next: NextFunction):Promise
 
 async function login(req: Request, res: Response, next: NextFunction):Promise<any> {
     const {email, password} = req.body;
-    console.log(email.length);
     try {
         const user: any = await User.findOne({email});
         if (!user) {

@@ -1,10 +1,13 @@
-export interface ImyError extends Error  {
-    statusCode:number;
-    message:string;
-    data:any;
+import {Schema} from "mongoose";
+import {IDocUser} from "./models";
+
+export interface ImyError extends Error {
+    statusCode: number;
+    message: string;
+    data: any;
 }
 
-export interface  IEducation{
+export interface IEducation {
     school: string;
     degree: string;
     fieldOfStudy: string;
@@ -25,10 +28,18 @@ export interface IExperience {
 }
 
 export interface IValidation {
-    [prop:string] :{
-        value:string;
+    [prop: string]: {
+        value: string;
         msg: string;
         param: string;
         location: string;
     }
+}
+
+export interface IComment {
+    user: IDocUser["_id"];
+    text: string;
+    name?: string;
+    avatar?: string;
+    date?: Date;
 }

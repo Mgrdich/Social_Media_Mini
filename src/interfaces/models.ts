@@ -1,6 +1,5 @@
 import {Document} from 'mongoose';
-import exp from "constants";
-import {IEducation, IExperience} from "./General";
+import {IComment, IEducation, IExperience} from "./General";
 
 export interface IUser {
     name: string;
@@ -11,7 +10,8 @@ export interface IUser {
 }
 
 //Mongoose modal
-export interface IDocUser  extends Document,IUser  { }
+export interface IDocUser extends Document, IUser {
+}
 
 
 export interface IProfile {
@@ -37,4 +37,23 @@ export interface IProfile {
 }
 
 //Mongoose modal
-export interface IDocProfile extends Document,IProfile { }
+export interface IDocProfile extends Document, IProfile {
+}
+
+
+export interface IPost {
+    user:IDocUser["_id"];
+    text:string;
+    name?:string;
+    avatar?:string;
+    likes?:Array<{user:IDocUser["_id"]}>;
+    comments?:Array<IComment>;
+    date?:Date;
+}
+
+//Mongoose modal
+
+export interface IDocPost extends Document, IPost {
+
+}
+
