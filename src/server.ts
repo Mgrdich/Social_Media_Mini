@@ -6,7 +6,7 @@ import passportConfig from "./config/passport";
 import {MONGODB_URI, MONGOOSE_OPTIONS} from "./config/keys";
 import {NextFunction, Request, Response} from "express";
 import users from "./routes/users";
-import posts from "./routes/profile";
+import posts from "./routes/posts";
 import profile from "./routes/profile";
 import {ImyError} from "./interfaces/General";
 

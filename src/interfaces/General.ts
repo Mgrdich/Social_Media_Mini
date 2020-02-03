@@ -1,4 +1,3 @@
-import {Schema} from "mongoose";
 import {IDocUser} from "./models";
 
 export interface ImyError extends Error {
