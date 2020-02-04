@@ -1,17 +1,22 @@
 html,
-body {
+body, #root {
   margin: 0;
   padding: 0;
   height: 100%; }
 
 footer.footer {
-  position: absolute;
-  bottom: 0;
   width: 100%;
   background-color: blueviolet;
-  height: 60px; }
+  height: 60px;
+  text-align: center;
+  vertical-align: center;
+  line-height: 60px;
+  color: white; }
 
 #container {
   min-height: 100%;
   position: relative;
   height: 100%; }
+
+.body_Header_Footer {
+  height: calc(100% - 64px - 60px); }
