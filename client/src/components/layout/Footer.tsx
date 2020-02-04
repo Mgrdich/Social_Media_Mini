@@ -2,9 +2,9 @@ import React from 'react';
 
 const Footer = () => {
     return(
-        <div>
-            Footer
-        </div>
+        <footer className="footer">
+            Copyright &copy; {new Date().getFullYear()} DevConnector
+        </footer>
     )
 };
 
