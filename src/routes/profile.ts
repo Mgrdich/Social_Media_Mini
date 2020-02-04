@@ -1,5 +1,5 @@
 import * as express from 'express';
-import {body} from "express-validator";
+import {body,param} from "express-validator";
 import {isAuth} from "../utilities/middlewares";
 import {
     createProfile,
@@ -17,7 +17,7 @@ router.get('/', isAuth(), getProfile);
 
 router.get('/handle/:handle', getProfileByHandle);
 
-router.get('/user/:userId', getProfileByUser);
+router.get('/user/:userId',getProfileByUser);
 
 router.get('/all', getAllProfiles);
 
@@ -34,15 +34,24 @@ router.post('/', isAuth(), [
         .isURL(),
 ], createProfile);
 
-//TODO Validation for the date (from,to ---> (optional))
 router.post('/experience', isAuth(), [
-    body(['title', 'company', 'from'])
+    body(['title', 'company'])
         .notEmpty(),
+    body('from','Invalid Date')
+        .isAfter(),
+    body('to','Invalid Date') //TODO should be written after from
+        .optional()
+        .isAfter()
 ], createExperience);
-//TODO Validation for the date (from,to ---> (optional))
+
 router.post('/education', isAuth(), [
     body(['school', 'degree', 'fieldOfStudy', 'from'])
-        .notEmpty()
+        .notEmpty(),
+    body('from','Invalid Date')
+        .isAfter(),
+    body('to','Invalid Date')
+        .optional()
+        .isAfter()
 ], createEducation);
 
 router.delete('/experience/:Id', isAuth(), deleteExperience);

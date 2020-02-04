@@ -1,5 +1,4 @@
 import {NextFunction, Request, Response} from "express";
-import {User} from "../models/User";
 import {Profile} from "../models/Profile";
 import {IDocProfile, IProfile} from "../interfaces/models";
 import {errorCatcher, errorThrower} from "../utilities/functions";
@@ -141,6 +140,7 @@ async function createProfile(req: Request, res: Response, next: NextFunction): P
 }
 
 async function createExperience(req: Request, res: Response, next: NextFunction): Promise<any> {
+    console.log("ssssssssssss");
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         try {
@@ -224,7 +224,7 @@ async function createEducation(req: Request, res: Response, next: NextFunction):
 async function deleteExperience(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
         const updatedProfile: IDocProfile = await Profile
-            .updateOne({user: req.user["_id"]}, {$pull: {experience: {_id: req.params.Id}}}, {multi: true,new:true});
+            .updateOne({user: req.user["_id"]}, {$pull: {experience: {_id: req.params.Id}}}, {multi: true, new: true});
         if (!updatedProfile) {
             errorThrower("Profile not found", 422);
         }
@@ -237,7 +237,7 @@ async function deleteExperience(req: Request, res: Response, next: NextFunction)
 async function deleteEducation(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
         const updatedProfile: IDocProfile = await Profile
-            .updateOne({user: req.user["_id"]}, {$pull: {education: {_id: req.params.Id}}}, {multi: true,new:true});
+            .updateOne({user: req.user["_id"]}, {$pull: {education: {_id: req.params.Id}}}, {multi: true, new: true});
         if (!updatedProfile) {
             errorThrower("Profile is not found", 422);
         }

@@ -118,6 +118,6 @@ const ProfileSchema = new Schema({
     }
 });
 
-const Profile = mongoose.model<IDocProfile>('profile', ProfileSchema);
+const   Profile = mongoose.model<IDocProfile>('profile', ProfileSchema);
 
 export {Profile};

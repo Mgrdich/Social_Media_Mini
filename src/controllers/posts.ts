@@ -62,8 +62,10 @@ async function deletePost(req: Request, res: Response, next: NextFunction): Prom
             errorThrower("User not Authorized", 401);
         }
 
-        const result = await post.remove(); //TODO check the result later
-        res.status(201).json({success: true});
+        const result = await post.remove();
+        if (result) {
+            res.status(201).json({success: true});
+        }
     } catch (err) {
         errorCatcher(next, err);
     }
@@ -136,7 +138,7 @@ async function unCommentPost(req: Request, res: Response, next: NextFunction): P
     try {
         const update: any = await Post.updateOne({
             _id: req.params.Id,
-        }, {$pull: {comments: {_id: req.params.comment_id,user: req.user["_id"]}}}, {multi: true});
+        }, {$pull: {comments: {_id: req.params.comment_id, user: req.user["_id"]}}}, {multi: true});
         res.status(201).json({success: true});
     } catch (err) {
         errorCatcher(next, err);

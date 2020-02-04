@@ -29,7 +29,6 @@ router.post('/', isAuth(), [
         .isLength({min: 10, max: 300})
 ], createPost);
 
-//TODO add Validation for the params
 router.post('/comment/:Id',isAuth(),[
     body('text')
         .isLength({min: 10, max: 300})
