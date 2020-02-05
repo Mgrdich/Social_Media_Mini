@@ -74,32 +74,17 @@ async function createProfile(req: Request, res: Response, next: NextFunction): P
     }
 
     const {
-        handle, skills, company, website, location, bio, status, githubUserName
+        handle, skills, status
         , youtube, twitter, facebook, linkedin, instagram
     } = req.body;
 
-    const profileFields: IProfile = {
+    let profileFields: IProfile = {
         user: req.user["_id"],
         handle,
         status,
         skills: skills.split(', ')
     };
-    if (company) {
-        profileFields.company = company;
-    }
-    if (website) {
-        profileFields.website = website;
-    }
-    if (location) {
-        profileFields.location = location;
-    }
-    if (bio) {
-        profileFields.bio = bio;
-    }
-    if (githubUserName) {
-        profileFields.githubUserName = githubUserName;
-    }
-
+    profileFields = {...profileFields,...req.body};
     // Social
     if (youtube) {
         profileFields.social.youtube = youtube;
@@ -140,7 +125,6 @@ async function createProfile(req: Request, res: Response, next: NextFunction): P
 }
 
 async function createExperience(req: Request, res: Response, next: NextFunction): Promise<any> {
-    console.log("ssssssssssss");
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         try {

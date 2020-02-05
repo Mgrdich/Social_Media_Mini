@@ -16,8 +16,10 @@ const App: React.FC = () => {
                 <Header/>
                 <Route exact path="/" component={Landing}/>
                 <Footer/>
-                <Route exact path="/login" component={Login}/>
-                <Route exact path="/register" component={Register}/>
+                <div className="loginRegister">
+                    <Route exact path="/login" component={Login}/>
+                    <Route exact path="/register" component={Register}/>
+                </div>
             </ThemeProvider>
         </BrowserRouter>
     );

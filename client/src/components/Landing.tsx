@@ -1,7 +1,9 @@
 import React from 'react';
 import {Button} from "@material-ui/core";
+import {Link} from "react-router-dom";
 
-const Landing:React.FC = () => {
+//TODO Button Link component
+const Landing: React.FC = () => {
     return (
         <div className="landingPage">
             <h1>
@@ -12,8 +14,8 @@ const Landing:React.FC = () => {
                 from other developers
             </p>
             <div className="registerBtns">
-                <Button color="primary" variant="contained" size="large">Login</Button>
-                <Button color="primary" variant="outlined" size="large">Register</Button>
+                <Link to="/Login"><Button color="primary" variant="contained" size="large">Login</Button></Link>
+                <Link to="/Register"><Button color="primary" variant="outlined" size="large">Register</Button></Link>
             </div>
         </div>
     );

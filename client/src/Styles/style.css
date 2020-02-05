@@ -62,5 +62,8 @@ footer.footer {
   display: flex;
   justify-content: center; }
 
-.landingPage .registerBtns button:nth-child(2) {
+.landingPage .registerBtns a:nth-child(2) {
   margin-left: 10px; }
+
+.loginRegister h1 {
+  text-align: center; }
