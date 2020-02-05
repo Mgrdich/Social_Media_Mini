@@ -40,13 +40,22 @@ footer {
   }
 }
 
-.navbar {
-  background-color: $bg_Color;
-  h6 {
-    color: $primary_color;
-    font-family: 'Cambay', sans-serif;
+.navBar {
+  .MuiTypography-h6 {
+    padding-top: 6px;
   }
-  .MuiSvgIcon-root {
-    color: $primary_color;
+}
+
+.landingPage {
+  h1 {
+    text-align: center;
+  }
+  .registerBtns {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    button:nth-child(2) {
+      margin-left: 10px;
+    }
   }
 }

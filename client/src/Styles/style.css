@@ -31,12 +31,16 @@ footer.footer {
   line-height: 60px;
   font-weight: bold; }
 
-.navbar {
-  background-color: #282c35; }
+.navBar .MuiTypography-h6 {
+  padding-top: 6px; }
 
-.navbar h6 {
-  color: #ffa7c4;
-  font-family: 'Cambay', sans-serif; }
+.landingPage h1 {
+  text-align: center; }
 
-.navbar .MuiSvgIcon-root {
-  color: #ffa7c4; }
+.landingPage .registerBtns {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center; }
+
+.landingPage .registerBtns button:nth-child(2) {
+  margin-left: 10px; }
