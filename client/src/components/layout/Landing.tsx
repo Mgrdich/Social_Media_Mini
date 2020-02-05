@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Landing = () => {
+const Landing:React.FC = () => {
     return (
-        <div className="body_Header_Footer">
-            
+        <div>
+
         </div>
     );
 };

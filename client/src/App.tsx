@@ -5,15 +5,13 @@ import "./Styles/style.css";
 import Landing from "./components/layout/Landing";
 
 const App = () => {
-  return (
-    <>
-        <div id="container">
+    return (
+        <>
             <Header/>
             <Landing/>
             <Footer/>
-        </div>
-    </>
-  );
+        </>
+    );
 };
 
 export default App;

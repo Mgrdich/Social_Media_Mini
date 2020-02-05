@@ -1,31 +1,52 @@
-$footer_height:60px;
-$header_height:64px;
+@import "variables";
 
-html,
-body,#root {
+@import url('https://fonts.googleapis.com/css?family=Cambay:400,700&display=swap');
+
+html {
   margin:0;
   padding:0;
   height:100%;
+  background-color: $bg_Color;
+}
+
+body {
+  margin:0;
+  padding:0;
+  min-height: 100%;
+  height: auto;
+  position: relative;
+  font-family: 'Cambay', sans-serif;
+  font-size: 16px;
+  color: $primary_color;
+}
+
+#root {
+  min-height: 100%;
+  padding-bottom: $footer_height; //because of react div element
 }
 
 footer {
   &.footer {
     width: 100%;
-    background-color: blueviolet;
+    background-color: $bg_Color;
+    border-top: 1px solid $primary_color;
+    position: absolute;
+    bottom: 0;
     height:$footer_height;
     text-align: center;
     vertical-align: center;
     line-height: $footer_height;
-    color: white;
+    font-weight: bold;
   }
 }
 
-#container {
-  min-height:100%;
-  position:relative;
-  height: 100%;
-}
-
-.body_Header_Footer {
-  height:calc(100% - #{$header_height} - #{$footer_height});
+.navbar {
+  background-color: $bg_Color;
+  h6 {
+    color: $primary_color;
+    font-family: 'Cambay', sans-serif;
+  }
+  .MuiSvgIcon-root {
+    color: $primary_color;
+  }
 }

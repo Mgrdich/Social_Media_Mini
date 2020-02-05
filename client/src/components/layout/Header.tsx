@@ -22,12 +22,12 @@ const useStyles = makeStyles((theme: Theme) => {
         });
     },
 );
-const Header = () => {
+const Header:React.FC = () => {
     const classes = useStyles();
 
     return (
         <div className={classes.root}>
-            <AppBar position="static">
+            <AppBar position="static" className="navbar">
                 <Toolbar>
                     <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
                         <MenuIcon/>

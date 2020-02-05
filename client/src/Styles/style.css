@@ -1,22 +1,42 @@
-html,
-body, #root {
+@import url("https://fonts.googleapis.com/css?family=Cambay:400,700&display=swap");
+html {
   margin: 0;
   padding: 0;
-  height: 100%; }
+  height: 100%;
+  background-color: #282c35; }
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  height: auto;
+  position: relative;
+  font-family: 'Cambay', sans-serif;
+  font-size: 16px;
+  color: #ffa7c4; }
+
+#root {
+  min-height: 100%;
+  padding-bottom: 60px; }
 
 footer.footer {
   width: 100%;
-  background-color: blueviolet;
+  background-color: #282c35;
+  border-top: 1px solid #ffa7c4;
+  position: absolute;
+  bottom: 0;
   height: 60px;
   text-align: center;
   vertical-align: center;
   line-height: 60px;
-  color: white; }
+  font-weight: bold; }
 
-#container {
-  min-height: 100%;
-  position: relative;
-  height: 100%; }
+.navbar {
+  background-color: #282c35; }
 
-.body_Header_Footer {
-  height: calc(100% - 64px - 60px); }
+.navbar h6 {
+  color: #ffa7c4;
+  font-family: 'Cambay', sans-serif; }
+
+.navbar .MuiSvgIcon-root {
+  color: #ffa7c4; }
