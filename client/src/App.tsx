@@ -1,18 +1,25 @@
 import React from 'react';
+import {Route} from "react-router";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
-import "./Styles/style.css";
-import Landing from "./components/layout/Landing";
-import { ThemeProvider } from '@material-ui/core';
+import Landing from "./components/Landing";
+import {ThemeProvider} from '@material-ui/core';
 import {theme} from "./Theme";
+import {BrowserRouter} from "react-router-dom";
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
 
-const App = () => {
+const App: React.FC = () => {
     return (
-        <ThemeProvider theme={theme}>
-            <Header/>
-            <Landing/>
-            <Footer/>
-        </ThemeProvider>
+        <BrowserRouter>
+            <ThemeProvider theme={theme}>
+                <Header/>
+                <Route exact path="/" component={Landing}/>
+                <Footer/>
+                <Route exact path="/login" component={Login}/>
+                <Route exact path="/register" component={Register}/>
+            </ThemeProvider>
+        </BrowserRouter>
     );
 };
 
