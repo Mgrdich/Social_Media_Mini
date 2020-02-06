@@ -1,5 +1,5 @@
 import React from 'react';
-import {TextField} from "@material-ui/core";
+import {Button, TextField} from "@material-ui/core";
 import PasswordField from "../Reusable/PasswordField";
 
 const Register: React.FC = () => {
@@ -9,11 +9,24 @@ const Register: React.FC = () => {
             <div className="form">
                 <form noValidate autoComplete="off">
                     <TextField
-                        label="Username"
+                        label="Name"
                         variant="outlined"
                         color="primary"
                     />
-                    <PasswordField/>
+                    <TextField
+                        label="email"
+                        variant="outlined"
+                        color="primary"
+                    />
+                    <PasswordField
+                        label="Password"
+                        name="password"
+                    />
+                    <PasswordField
+                        label="Current Password"
+                        name="current_password"
+                    />
+                    <Button color="primary" variant="contained" size="large" className="submitBtn">Login</Button>
                 </form>
             </div>
 

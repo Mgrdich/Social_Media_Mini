@@ -76,6 +76,9 @@ footer.footer {
 .loginRegister .form form .MuiFormControl-root:not(:first-child) {
   margin-top: 30px; }
 
+.loginRegister .form form .submitBtn {
+  margin-top: 40px; }
+
 .flex {
   display: flex; }
 

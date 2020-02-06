@@ -2,7 +2,13 @@ import React, {useState} from 'react';
 import {VisibilityOff,Visibility} from "@material-ui/icons";
 import {FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput} from "@material-ui/core";
 
-const PasswordField:React.FC = (props) => {
+interface IPasswordField {
+    label:string;
+    error?:boolean;
+    name:string;
+    inputRef?:any;
+}
+const PasswordField:React.FC<IPasswordField> = (props) => {
     const [showPassword, changeShowPassword] = useState<boolean>(false);
 
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -10,7 +16,7 @@ const PasswordField:React.FC = (props) => {
     };
     return (
         <FormControl  variant="outlined">
-            <InputLabel>Password</InputLabel>
+            <InputLabel>{props.label}</InputLabel>
             <OutlinedInput
                 type={showPassword ? 'text' : 'password'}
                 endAdornment={
@@ -25,6 +31,8 @@ const PasswordField:React.FC = (props) => {
                         </IconButton>
                     </InputAdornment>
                 }
+                inputRef={props.inputRef}
+                name={props.name}
                 labelWidth={70}
             />
         </FormControl>
