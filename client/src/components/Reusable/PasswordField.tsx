@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
 import {Visibility, VisibilityOff} from "@material-ui/icons";
-import {FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput} from "@material-ui/core";
+import {FormControl, FormHelperText, IconButton, InputAdornment, InputLabel, OutlinedInput} from "@material-ui/core";
 
 interface IPasswordField {
+    id?:string
     label: string;
     error?: boolean;
     name: string;
     inputRef?: any;
-    helperText?: string;
+    helperText?: string | boolean;
 }
 
 const PasswordField: React.FC<IPasswordField> = (props) => {
@@ -17,7 +18,7 @@ const PasswordField: React.FC<IPasswordField> = (props) => {
         event.preventDefault();
     };
     return (
-        <FormControl variant="outlined">
+        <FormControl variant="outlined" error={props.error}>
             <InputLabel>{props.label}</InputLabel>
             <OutlinedInput
                 type={showPassword ? 'text' : 'password'}
@@ -36,8 +37,8 @@ const PasswordField: React.FC<IPasswordField> = (props) => {
                 inputRef={props.inputRef}
                 name={props.name}
                 labelWidth={70}
-                error={props.error}
             />
+            <FormHelperText id={props.id}>{props.helperText?props.helperText:''}</FormHelperText>
         </FormControl>
     );
 };

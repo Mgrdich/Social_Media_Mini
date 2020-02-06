@@ -35,10 +35,10 @@ const Login: React.FC = () => {
                     />
                     <PasswordField
                         label="Password"
+                        id="password"
                         name="password"
                         inputRef={register({
                             required: "This Field is Required",
-                            maxLength:3
                         })}
                         error={!!errors.password}
                         helperText={!!errors.username && errors.username.message}
