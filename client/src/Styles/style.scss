@@ -18,13 +18,14 @@ body {
   font-family: 'Cambay', sans-serif;
   font-size: 16px;
   color: $primary_color;
+
   h1 {
     font-size: 45px;
   }
 
   a {
     text-decoration: none;
-    color:inherit;
+    color: inherit;
   }
 }
 
@@ -55,10 +56,6 @@ footer {
     .MuiTypography-h6 {
       padding-top: 6px;
     }
-
-    .title {
-      flex-grow: 1;
-    }
   }
 }
 
@@ -66,6 +63,7 @@ footer {
   h1 {
     text-align: center;
   }
+
   p {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -88,5 +86,30 @@ footer {
 .loginRegister {
   h1 {
     text-align: center;
+  }
+  .form {
+    margin: 0 auto;
+    width: 25%;
+    form {
+      display: flex;
+      flex-direction: column;
+      .MuiFormControl-root {
+        &:not(:first-child) {
+          margin-top: 30px;
+        }
+      }
+    }
+  }
+}
+
+.flex {
+  display: flex;
+
+  &.spaceBetween {
+    justify-content: space-between;
+  }
+
+  &.flexGrow {
+    flex-grow: 1;
   }
 }

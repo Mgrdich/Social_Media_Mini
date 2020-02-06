@@ -44,9 +44,6 @@ footer.footer {
 .navbarRoot .navBar .MuiTypography-h6 {
   padding-top: 6px; }
 
-.navbarRoot .navBar .title {
-  flex-grow: 1; }
-
 .landingPage h1 {
   text-align: center; }
 
@@ -67,3 +64,23 @@ footer.footer {
 
 .loginRegister h1 {
   text-align: center; }
+
+.loginRegister .form {
+  margin: 0 auto;
+  width: 25%; }
+
+.loginRegister .form form {
+  display: flex;
+  flex-direction: column; }
+
+.loginRegister .form form .MuiFormControl-root:not(:first-child) {
+  margin-top: 30px; }
+
+.flex {
+  display: flex; }
+
+.flex.spaceBetween {
+  justify-content: space-between; }
+
+.flex.flexGrow {
+  flex-grow: 1; }
