@@ -7,7 +7,7 @@ import {isAuth} from "../utilities/middlewares";
 const router = express.Router();
 
 
-router.put("/register", [
+router.put("/register", [ //TODO checking password validation
     body("email")
         .isEmail()
         .bail()

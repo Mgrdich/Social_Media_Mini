@@ -38,7 +38,7 @@ async function login(req: Request, res: Response, next: NextFunction):Promise<an
     try {
         const user: any = await User.findOne({email});
         if (!user) {
-            return res.status(400).json({email: 'no users found'})
+            return res.status(422).json({email: 'no users found'})
         }
 
         let isMatch: boolean = await bcrypt.compare(password, user.password);

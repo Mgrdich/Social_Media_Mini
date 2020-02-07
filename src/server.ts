@@ -19,6 +19,14 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 
+app.use(function (req: Request, res: Response, next: NextFunction) {
+    console.log("sssssss");
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    next();
+});
+
 // Passport middleware
 app.use(passport.initialize());
 
