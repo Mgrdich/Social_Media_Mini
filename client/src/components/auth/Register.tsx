@@ -2,17 +2,26 @@ import React from 'react';
 import {Button, TextField} from "@material-ui/core";
 import PasswordField from "../Reusable/PasswordField";
 import {useForm} from "react-hook-form";
+import axios from 'axios';
+import {URL} from "../../config/config";
+
 type FormData = {
-    email:string;
-    password:string;
-    name:string;
-    current_password:string;
+    email: string;
+    password: string;
+    name: string;
+    current_password: string;
 }
+
 const Register: React.FC = () => {
     const {handleSubmit, register, errors} = useForm<FormData>();
 
     const onSubmit = function (values: any) {
-        console.log(values);
+        axios.put(`${URL}/users/register`, values)
+            .then(function (res) {
+            console.log(res.data);
+        }).catch(function (e: Error) {
+            console.log(e);
+        })
     };
 
 
@@ -62,7 +71,8 @@ const Register: React.FC = () => {
                         error={!!errors.current_password}
                         helperText={!!errors.current_password && errors.current_password.message}
                     />
-                    <Button color="primary" variant="contained" size="large" className="submitBtn" type="submit">Login</Button>
+                    <Button color="primary" variant="contained" size="large" className="submitBtn"
+                            type="submit">Login</Button>
                 </form>
             </div>
 

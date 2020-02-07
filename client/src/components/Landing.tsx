@@ -14,7 +14,7 @@ const Landing: React.FC = () => {
             </p>
             <div className="registerBtns">
                 <ButtonLink to="/Login" color="primary"  variant="contained" size="large">Login</ButtonLink>
-                <ButtonLink to="/Login" color="primary"  variant="outlined" size="large">Register</ButtonLink>
+                <ButtonLink to="/Register" color="primary"  variant="outlined" size="large">Register</ButtonLink>
             </div>
             <div className="image">
                 <img src={cupcakeSrc} alt=""/>
