@@ -62,6 +62,10 @@ footer.footer {
 .landingPage .registerBtns a:nth-child(2) {
   margin-left: 10px; }
 
+.landingPage .image {
+  width: 400px;
+  margin: 0 auto; }
+
 .loginRegister h1 {
   text-align: center; }
 

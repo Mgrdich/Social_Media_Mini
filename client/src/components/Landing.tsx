@@ -1,8 +1,7 @@
 import React from 'react';
-import {Button} from "@material-ui/core";
-import {Link} from "react-router-dom";
+import cupcakeSrc from "../images/cupcake.svg";
+import ButtonLink from "./Reusable/ButtonLink";
 
-//TODO Button Link component
 const Landing: React.FC = () => {
     return (
         <div className="landingPage">
@@ -14,8 +13,11 @@ const Landing: React.FC = () => {
                 from other developers
             </p>
             <div className="registerBtns">
-                <Link to="/Login"><Button color="primary" variant="contained" size="large">Login</Button></Link>
-                <Link to="/Register"><Button color="primary" variant="outlined" size="large">Register</Button></Link>
+                <ButtonLink to="/Login" color="primary"  variant="contained" size="large">Login</ButtonLink>
+                <ButtonLink to="/Login" color="primary"  variant="outlined" size="large">Register</ButtonLink>
+            </div>
+            <div className="image">
+                <img src={cupcakeSrc} alt=""/>
             </div>
         </div>
     );

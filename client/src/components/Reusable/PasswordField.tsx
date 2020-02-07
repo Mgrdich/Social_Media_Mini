@@ -9,6 +9,7 @@ interface IPasswordField {
     name: string;
     inputRef?: any;
     helperText?: string | boolean;
+    labelWidth?:number;
 }
 
 const PasswordField: React.FC<IPasswordField> = (props) => {
@@ -36,7 +37,7 @@ const PasswordField: React.FC<IPasswordField> = (props) => {
                 }
                 inputRef={props.inputRef}
                 name={props.name}
-                labelWidth={70}
+                labelWidth={props.labelWidth?props.labelWidth:70}
             />
             <FormHelperText id={props.id}>{props.helperText?props.helperText:''}</FormHelperText>
         </FormControl>

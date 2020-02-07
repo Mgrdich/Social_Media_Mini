@@ -4,7 +4,7 @@ import PasswordField from "../Reusable/PasswordField";
 import {useForm} from "react-hook-form";
 
 type FormData = {
-    username:string;
+    email:string;
     password:string;
 }
 
@@ -27,11 +27,11 @@ const Login: React.FC = () => {
                         label="Username"
                         variant="outlined"
                         color="primary"
-                        error={!!errors.username}
+                        error={!!errors.email}
                         inputRef={register({
                             required: "This Field is Required"
                         })}
-                        helperText={!!errors.username && errors.username.message}
+                        helperText={!!errors.email && errors.email.message}
                     />
                     <PasswordField
                         label="Password"
@@ -41,7 +41,7 @@ const Login: React.FC = () => {
                             required: "This Field is Required",
                         })}
                         error={!!errors.password}
-                        helperText={!!errors.username && errors.username.message}
+                        helperText={!!errors.password && errors.password.message}
                     />
                     <Button color="primary" variant="contained" size="large" className="submitBtn"
                             type="submit">Login</Button>
