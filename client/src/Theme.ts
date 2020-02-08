@@ -4,10 +4,10 @@ let theme: Theme;
 theme = createMuiTheme({
     palette: {
         primary: {
-            main: '#ffa7c4',
+            main: "#ffa7c4",
         },
         secondary: {
-            main: '#282c35',
+            main: "#282c35",
         },
     },
     typography: {
@@ -15,6 +15,25 @@ theme = createMuiTheme({
             'Cambay',
             'sans-serif'
         ].join(','),
+    },
+    overrides: {
+        MuiInputBase: {
+            input: {
+                color: "#fff",
+            },
+        },
+        MuiOutlinedInput: {
+            root: {
+                "&:hover": {
+                    notchedOutline: {
+                        borderColor: "#fff",
+                    }
+                }
+            },
+            notchedOutline: {
+                borderColor: "#fff",
+            },
+        }
     }
 });
 

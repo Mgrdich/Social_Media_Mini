@@ -18,7 +18,7 @@ const Login: React.FC = () => {
     const onSubmit = function (values: any) {
         axios.post(`${URL}/users/login`, values)
             .then(function (res: any) {
-                console.log(res.data);
+                console.log(res.data); //TODO Change it
             }).catch(function (e: any) {
             if (!e.response.data) {
                 console.error("No Response is found");
