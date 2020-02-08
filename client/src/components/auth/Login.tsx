@@ -2,6 +2,7 @@ import React from 'react';
 import {Button, TextField} from "@material-ui/core";
 import PasswordField from "../Reusable/PasswordField";
 import {useForm} from "react-hook-form";
+import {useServerErrorHandle} from "../Hooks/useServerErrorHandle";
 import axios from "axios";
 import {URL} from "../../config/config";
 
@@ -12,16 +13,19 @@ type FormData = {
 
 const Login: React.FC = () => {
     const {handleSubmit, register, errors} = useForm<FormData>();
+    const [serverError, setterError] = useServerErrorHandle();
 
     const onSubmit = function (values: any) {
         axios.post(`${URL}/users/login`, values)
             .then(function (res: any) {
                 console.log(res.data);
-            }).catch(function (e: Error) {
-            console.log(e);
+            }).catch(function (e: any) {
+            if (!e.response.data) {
+                console.error("No Response is found");
+            }
+            setterError(e.response.data);
         });
     };
-
     return (
         <>
             <h1>Login</h1>
@@ -29,16 +33,16 @@ const Login: React.FC = () => {
             <div className="form">
                 <form noValidate autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
                     <TextField
-                        id="username"
-                        name="username"
-                        label="Username"
+                        id="email"
+                        name="email"
+                        label="Email"
                         variant="outlined"
                         color="primary"
-                        error={!!errors.email}
+                        error={!!errors.email || "email" in serverError}
                         inputRef={register({
                             required: "This Field is Required"
                         })}
-                        helperText={!!errors.email && errors.email.message}
+                        helperText={(!!errors.email && errors.email.message) || ("email" in serverError && serverError.email) }
                     />
                     <PasswordField
                         label="Password"
