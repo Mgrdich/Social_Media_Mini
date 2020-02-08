@@ -1,0 +1,15 @@
+.MuiInputAdornment-root {
+  .MuiIconButton-label {
+    .MuiSvgIcon-root {
+      fill: white;
+    }
+  }
+}
+
+.MuiFormControl-root {
+  .MuiOutlinedInput-root:hover {
+    .MuiOutlinedInput-notchedOutline {
+      border-color: $primary_color;
+    }
+  }
+}

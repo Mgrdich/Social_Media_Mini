@@ -24,7 +24,7 @@ theme = createMuiTheme({
         },
         MuiOutlinedInput: {
             root: {
-                "&:hover": {
+                hover: {
                     notchedOutline: {
                         borderColor: "#fff",
                     }
@@ -33,7 +33,12 @@ theme = createMuiTheme({
             notchedOutline: {
                 borderColor: "#fff",
             },
-        }
+        },
+        MuiFormLabel: {
+            root:{
+                color:"#fff"
+            }
+        },
     }
 });
 
