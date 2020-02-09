@@ -1,7 +1,7 @@
 import {NextFunction, Request, Response} from "express";
 import {Profile} from "../models/Profile";
 import {IDocProfile, IProfile} from "../interfaces/models";
-import {errorCatcher, errorThrower} from "../utilities/functions";
+import {errorCatcher, errorFormatter, errorThrower} from "../utilities/functions";
 import {validationResult} from "express-validator";
 import {IEducation, IExperience} from "../interfaces/General";
 
@@ -64,7 +64,7 @@ async function getAllProfiles(req: Request, res: Response, next: NextFunction): 
 
 async function createProfile(req: Request, res: Response, next: NextFunction): Promise<any> {
 
-    const errors = validationResult(req);
+    const errors = validationResult(req).formatWith(errorFormatter);
     if (!errors.isEmpty()) {
         try {
             errorThrower("Validation Failed", 422, errors.mapped());
@@ -125,7 +125,7 @@ async function createProfile(req: Request, res: Response, next: NextFunction): P
 }
 
 async function createExperience(req: Request, res: Response, next: NextFunction): Promise<any> {
-    const errors = validationResult(req);
+    const errors = validationResult(req).formatWith(errorFormatter);
     if (!errors.isEmpty()) {
         try {
             errorThrower("Validation Failed", 422, errors.mapped());
@@ -165,7 +165,7 @@ async function createExperience(req: Request, res: Response, next: NextFunction)
 }
 
 async function createEducation(req: Request, res: Response, next: NextFunction): Promise<any> {
-    const errors = validationResult(req);
+    const errors = validationResult(req).formatWith(errorFormatter);
     if (!errors.isEmpty()) {
         try {
             errorThrower("Validation Failed", 422, errors.mapped());

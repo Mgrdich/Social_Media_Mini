@@ -42,3 +42,11 @@ export interface IComment {
     avatar?: string;
     date?: Date;
 }
+
+export interface IError {
+    value: string | number;
+    msg: string;
+    param: string;
+    location: string;
+    nestedErrors?:Array<any>;
+}

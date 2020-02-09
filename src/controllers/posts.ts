@@ -2,12 +2,12 @@ import {NextFunction, Request, Response} from "express";
 import {IDocPost, IPost} from "../interfaces/models";
 import {Post} from "../models/Post";
 import {validationResult} from "express-validator";
-import {errorCatcher, errorThrower} from "../utilities/functions";
+import {errorCatcher, errorFormatter, errorThrower} from "../utilities/functions";
 import {IComment} from "../interfaces/General";
 
 async function createPost(req: Request, res: Response, next: NextFunction): Promise<any> {
 
-    const errors = validationResult(req);
+    const errors = validationResult(req).formatWith(errorFormatter);
     if (!errors.isEmpty()) {
         try {
             errorThrower("Validation Failed", 422, errors.mapped());
@@ -100,7 +100,7 @@ async function unLikePost(req: Request, res: Response, next: NextFunction): Prom
 
 async function commentPost(req: Request, res: Response, next: NextFunction): Promise<any> {
 
-    const errors = validationResult(req);
+    const errors = validationResult(req).formatWith(errorFormatter);
     if (!errors.isEmpty()) {
         try {
             errorThrower("Validation Failed", 422, errors.mapped());

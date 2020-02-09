@@ -1,7 +1,7 @@
 import {NextFunction} from "express";
-import {IValidation} from "../interfaces/General";
+import {IError, IValidation} from "../interfaces/General";
 
-const errorThrower = function (errMessage: string, statusCode: number,data?:any) {
+const errorThrower = function (errMessage: string, statusCode: number, data?: any) {
     const error = new Error(errMessage);
     error["statusCode"] = statusCode;
     error["data"] = data;
@@ -14,4 +14,9 @@ const errorCatcher = function (next: NextFunction, err: Error) {
     }
     next(err);
 };
-export {errorThrower, errorCatcher};
+
+const errorFormatter = function ({location, msg, param, value, nestedErrors}) { //change this later
+    return `${msg}`;
+};
+
+export {errorThrower, errorCatcher, errorFormatter};

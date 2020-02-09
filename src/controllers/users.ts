@@ -6,13 +6,14 @@ import * as jwt from 'jsonwebtoken';
 import * as bcrypt from 'bcryptjs';
 import * as gravatar from 'gravatar';
 import {SECRET_KEY} from "../config/keys";
-import {errorCatcher, errorThrower} from "../utilities/functions";
+import {errorCatcher, errorFormatter, errorThrower} from "../utilities/functions";
 
 
 async function register(req: Request, res: Response, next: NextFunction):Promise<any> {
     const {email, name, password} = req.body;
     try {
-        const errors = validationResult(req);
+        const errors:any = validationResult(req).formatWith(errorFormatter);
+
         if (!errors.isEmpty()) {
             errorThrower("Validation Failed", 422, errors.mapped());
         }
