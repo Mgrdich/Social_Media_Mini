@@ -12,7 +12,6 @@ const initalState: IAuthReducer = {
 };
 
 export default function (state: IAuthReducer = initalState, action: any) {
-    console.log(action);
     switch (action.type) {
         case CURRENT_USER:
             return {

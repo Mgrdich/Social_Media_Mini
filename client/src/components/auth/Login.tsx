@@ -36,7 +36,7 @@ const Login: React.FC<RouteComponentProps> = (props) => {
         if(isAuth) {
             props.history.push('/dashboard');
         }
-    },[isAuth]);
+    },[isAuth,props.history]);
 
     return (
         <>

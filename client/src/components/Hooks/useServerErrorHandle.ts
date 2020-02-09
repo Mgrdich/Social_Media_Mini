@@ -5,7 +5,7 @@ export function useServerErrorHandle() {
 
     const errorSetter = useCallback<any>(function (error: any) {
         setError({...error});
-    }, [errors]);
+    },[]);
 
     return [errors, errorSetter];
 }

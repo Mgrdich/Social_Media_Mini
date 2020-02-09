@@ -1,8 +1,6 @@
-import {compose, createStore} from "redux";
+import {applyMiddleware, createStore} from "redux";
 import rootReducer from './reducers'
-
-const initialState = {};
-
+import {composeWithDevTools} from 'redux-devtools-extension';
 
 declare global {
 
@@ -11,7 +9,8 @@ declare global {
     }
 }
 
-export const store = createStore(
-    rootReducer,
-    initialState,
-    compose(typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
+const middleware: Array<any> = [];
+
+export const store = createStore(rootReducer, composeWithDevTools(
+    applyMiddleware(...middleware)
+));
