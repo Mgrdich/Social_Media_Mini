@@ -4,6 +4,8 @@ import PasswordField from "../Reusable/PasswordField";
 import {useForm} from "react-hook-form";
 import axios from 'axios';
 import {URL} from "../../config/config";
+import {useServerErrorHandle} from "../Hooks/useServerErrorHandle";
+import {RouteComponentProps} from "react-router";
 
 type FormData = {
     email: string;
@@ -12,15 +14,20 @@ type FormData = {
     current_password: string;
 }
 
-const Register: React.FC = () => {
+const Register: React.FC<RouteComponentProps>= (props) => {
     const {handleSubmit, register, errors} = useForm<FormData>();
+    const [serverError, setterError] = useServerErrorHandle();
+
 
     const onSubmit = function (values: any) {
         axios.put(`${URL}/users/register`, values)
             .then(function (res) {
-            console.log(res.data);
-        }).catch(function (e: Error) {
-            console.log(e);
+                props.history.push('/login');
+            }).catch(function (e: any) {
+            if (!e.response.data) {
+                console.error("No Response is found");
+            }
+            setterError(e.response.data.data);
         })
     };
 
@@ -35,21 +42,21 @@ const Register: React.FC = () => {
                         label="Name"
                         name="name"
                         variant="outlined"
-                        error={!!errors.name}
+                        error={!!errors.name || "name" in serverError}
                         inputRef={register({
                             required: "This Field is Required"
                         })}
-                        helperText={!!errors.name && errors.name.message}
+                        helperText={(!!errors.name && errors.name.message) || ("name" in serverError && serverError.name)}
                     />
                     <TextField
                         label="Email"
                         name="email"
                         variant="outlined"
-                        error={!!errors.email}
+                        error={!!errors.email || "email" in serverError}
                         inputRef={register({
                             required: "This Field is Required"
                         })}
-                        helperText={!!errors.email && errors.email.message}
+                        helperText={(!!errors.email && errors.email.message) || ("email" in serverError && serverError.email)}
 
                     />
                     <PasswordField
@@ -58,8 +65,8 @@ const Register: React.FC = () => {
                         inputRef={register({
                             required: "This Field is Required",
                         })}
-                        error={!!errors.password}
-                        helperText={!!errors.password && errors.password.message}
+                        error={!!errors.password || "password" in serverError}
+                        helperText={(!!errors.password && errors.password.message) || ("password" in serverError && serverError.password)}
                     />
                     <PasswordField
                         label="Current Password"
@@ -68,8 +75,8 @@ const Register: React.FC = () => {
                         inputRef={register({
                             required: "This Field is Required",
                         })}
-                        error={!!errors.current_password}
-                        helperText={!!errors.current_password && errors.current_password.message}
+                        error={!!errors.current_password || "current_password" in serverError}
+                        helperText={(!!errors.current_password && errors.current_password.message) || ("current_password" in serverError && serverError.current_password)}
                     />
                     <Button color="primary" variant="contained" size="large" className="submitBtn"
                             type="submit">Login</Button>

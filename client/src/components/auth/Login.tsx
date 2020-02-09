@@ -3,8 +3,10 @@ import {Button, TextField} from "@material-ui/core";
 import PasswordField from "../Reusable/PasswordField";
 import {useForm} from "react-hook-form";
 import {useServerErrorHandle} from "../Hooks/useServerErrorHandle";
-import axios from "axios";
 import {URL} from "../../config/config";
+import {useDispatch} from "react-redux";
+import axios from "axios";
+import {loginUser} from "../../action/authActions";
 
 type FormData = {
     email: string;
@@ -14,11 +16,12 @@ type FormData = {
 const Login: React.FC = () => {
     const {handleSubmit, register, errors} = useForm<FormData>();
     const [serverError, setterError] = useServerErrorHandle();
+    const dispatch = useDispatch();
 
     const onSubmit = function (values: any) {
         axios.post(`${URL}/users/login`, values)
             .then(function (res: any) {
-
+                dispatch(loginUser(res));
             }).catch(function (e: any) {
             if (!e.response.data) {
                 console.error("No Response is found");

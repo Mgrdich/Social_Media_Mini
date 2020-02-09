@@ -1,4 +1,4 @@
-import {Action} from "redux";
+import {TEST_DISPATCH} from "../action/types";
 
 interface IAuthReducer {
     isAuthenticated: boolean;
@@ -10,8 +10,13 @@ const initalState: IAuthReducer = {
     user: {}
 };
 
-export default function (state: IAuthReducer = initalState, action: Action) {
+export default function (state: IAuthReducer = initalState, action: any) {
     switch (action.type) {
+        case TEST_DISPATCH:
+            return {
+                ...state,
+                user: action.payload
+            };
         default:
             return state;
     }

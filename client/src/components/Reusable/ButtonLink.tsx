@@ -10,7 +10,6 @@ interface IButtonLink extends ButtonProps {
 
 const ButtonLink: React.FC<IButtonLink> = (props) => {
     const {to, children,...ButtonProps} = props;
-    console.log(props);
     return (
         <Link to={props.to}>
             <Button {...ButtonProps}>{children}</Button>

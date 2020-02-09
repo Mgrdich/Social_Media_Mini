@@ -1,10 +1,8 @@
-import {applyMiddleware, compose, createStore} from "redux";
-import thunk from 'redux-thunk';
+import {compose, createStore} from "redux";
 import rootReducer from './reducers'
 
 const initialState = {};
 
-const middleware: Array<any> = [thunk];
 
 declare global {
 
@@ -16,6 +14,4 @@ declare global {
 export const store = createStore(
     rootReducer,
     initialState,
-    compose(applyMiddleware(...middleware),
-        typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
-);
+    compose(typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
