@@ -1,4 +1,5 @@
-import {TEST_DISPATCH} from "../action/types";
+import {CURRENT_USER} from "../action/types";
+import {isEmpty} from "../util/functions";
 
 interface IAuthReducer {
     isAuthenticated: boolean;
@@ -11,10 +12,12 @@ const initalState: IAuthReducer = {
 };
 
 export default function (state: IAuthReducer = initalState, action: any) {
+    console.log(action);
     switch (action.type) {
-        case TEST_DISPATCH:
+        case CURRENT_USER:
             return {
                 ...state,
+                isAuthenticated:!isEmpty(action.payload),
                 user: action.payload
             };
         default:

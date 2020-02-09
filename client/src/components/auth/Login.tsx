@@ -1,21 +1,23 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Button, TextField} from "@material-ui/core";
 import PasswordField from "../Reusable/PasswordField";
 import {useForm} from "react-hook-form";
 import {useServerErrorHandle} from "../Hooks/useServerErrorHandle";
 import {URL} from "../../config/config";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
 import {loginUser} from "../../action/authActions";
+import {RouteComponentProps} from "react-router";
 
 type FormData = {
     email: string;
     password: string;
 }
 
-const Login: React.FC = () => {
+const Login: React.FC<RouteComponentProps> = (props) => {
     const {handleSubmit, register, errors} = useForm<FormData>();
     const [serverError, setterError] = useServerErrorHandle();
+    const isAuth  = useSelector<any>(state => state.auth.isAuthenticated);
     const dispatch = useDispatch();
 
     const onSubmit = function (values: any) {
@@ -29,6 +31,13 @@ const Login: React.FC = () => {
             setterError(e.response.data);
         });
     };
+
+    useEffect(function () {
+        if(isAuth) {
+            props.history.push('/dashboard');
+        }
+    },[isAuth]);
+
     return (
         <>
             <h1>Login</h1>

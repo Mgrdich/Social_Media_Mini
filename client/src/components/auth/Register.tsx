@@ -79,7 +79,7 @@ const Register: React.FC<RouteComponentProps>= (props) => {
                         helperText={(!!errors.current_password && errors.current_password.message) || ("current_password" in serverError && serverError.current_password)}
                     />
                     <Button color="primary" variant="contained" size="large" className="submitBtn"
-                            type="submit">Login</Button>
+                            type="submit">Register</Button>
                 </form>
             </div>
 
