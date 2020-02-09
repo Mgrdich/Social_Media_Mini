@@ -23,13 +23,6 @@ theme = createMuiTheme({
             },
         },
         MuiOutlinedInput: {
-            root: {
-                hover: {
-                    notchedOutline: {
-                        borderColor: "#fff",
-                    }
-                }
-            },
             notchedOutline: {
                 borderColor: "#fff",
             },
