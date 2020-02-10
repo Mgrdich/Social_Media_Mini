@@ -1,4 +1,4 @@
-import {CURRENT_USER} from "../action/types";
+import {SET_CURRENT_USER} from "../action/types";
 import {isEmpty} from "../util/functions";
 
 interface IAuthReducer {
@@ -13,7 +13,7 @@ const initalState: IAuthReducer = {
 
 export default function (state: IAuthReducer = initalState, action: any) {
     switch (action.type) {
-        case CURRENT_USER:
+        case SET_CURRENT_USER:
             return {
                 ...state,
                 isAuthenticated:!isEmpty(action.payload),

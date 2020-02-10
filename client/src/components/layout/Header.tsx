@@ -6,6 +6,24 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import {Link} from "react-router-dom";
+import Auth from "../HOC/Auth";
+
+
+const guestLinks: JSX.Element = (
+    <>
+        <Link to="/Login">
+            <Button color="secondary">Login</Button>
+        </Link>
+        <Link to="/Register">
+            <Button color="secondary">Register</Button>
+        </Link>
+    </>
+);
+const authLinks: JSX.Element = (
+    <>
+        <div>debil</div>
+    </>
+);
 
 const Header: React.FC = () => {
     return (
@@ -24,12 +42,7 @@ const Header: React.FC = () => {
                         </Link>
 
                         <div>
-                            <Link to="/Login">
-                                <Button color="secondary">Login</Button>
-                            </Link>
-                            <Link to="/Register">
-                                <Button color="secondary">Register</Button>
-                            </Link>
+                            <Auth ElementWithAuth={authLinks} ElementNoAuth={guestLinks}/>
                         </div>
                     </div>
 
