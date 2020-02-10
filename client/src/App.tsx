@@ -9,9 +9,21 @@ import Register from "./components/auth/Register";
 import HeaderFooterLayout from "./components/HOC/HeaderFooterLayout";
 import {Provider} from "react-redux";
 import {store} from "./store";
+import {setCurrentUser} from "./action/authActions";
+import {setAuthToken} from "./util/functions";
+import jwt_decode from "jwt-decode";
 
+if (localStorage.token) {
+    // Set auth token header auth
+    setAuthToken(localStorage.token);
+    // Decode token and get user info and exp
+    const decoded = jwt_decode(localStorage.token);
+    // Set user and isAuthenticated
+    store.dispatch(setCurrentUser(decoded));
+}
 
 const App: React.FC = () => {
+
     return (
 
         <Provider store={store}>
