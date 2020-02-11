@@ -2,10 +2,11 @@ import React from 'react';
 import {useSelector} from "react-redux";
 
 interface IIsAuth {
-    ElementWithAuth?: any; //TODO do it for Component also
+    ElementWithAuth?: any;
     ElementNoAuth?: any;
 }
 
+//Technically not an HOC
 const Auth: React.FC<IIsAuth> = (props) => {
     const {ElementWithAuth, ElementNoAuth} = props;
     const isAuth = useSelector<any>(state => state.auth.isAuthenticated);
