@@ -3,7 +3,7 @@ import React from "react";
 
 
 //Check for performance
-export function AuthorizationComp<P extends object>(WrappedComponent: React.ElementType, allowedRoles?: Array<string>):React.FC<P> { //with empty Array only Authntication check
+export function AuthorizationComp<P extends object>(WrappedComponent: React.FC<P>, allowedRoles?: Array<string>):React.FC<P> { //with empty Array only Authntication check
     return function WithAuthorization(props: P) {
 
         const isAuth = useSelector<any>(state => state.auth.isAuthenticated);
