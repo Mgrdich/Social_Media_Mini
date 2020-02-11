@@ -51,6 +51,7 @@ async function login(req: Request, res: Response, next: NextFunction):Promise<an
             id: user.id,
             name: user.name,
             avatar: user.avatar,
+            role:user.role
         };
         const token: string = await jwt.sign(payload, SECRET_KEY, {expiresIn: 3600});
         res.status(200).json({success: true, token: `Bearer ${token}`});

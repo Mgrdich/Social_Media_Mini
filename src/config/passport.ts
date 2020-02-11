@@ -1,5 +1,4 @@
 import * as passport_jwt from 'passport-jwt';
-import * as mongoose from 'mongoose';
 import {SECRET_KEY} from "./keys";
 import {User} from "../models/User";
 

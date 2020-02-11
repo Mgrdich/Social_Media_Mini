@@ -5,6 +5,7 @@ export interface IUser {
     name: string;
     email: string;
     password: string;
+    role?: string;
     avatar?: string;
     date?: Date;
 }
@@ -42,13 +43,13 @@ export interface IDocProfile extends Document, IProfile {
 
 
 export interface IPost {
-    user:IDocUser["_id"];
-    text:string;
-    name?:string;
-    avatar?:string;
-    likes?:Array<{user:IDocUser["_id"]}>;
-    comments?:Array<IComment>;
-    date?:Date;
+    user: IDocUser["_id"];
+    text: string;
+    name?: string;
+    avatar?: string;
+    likes?: Array<{ user: IDocUser["_id"] }>;
+    comments?: Array<IComment>;
+    date?: Date;
 }
 
 //Mongoose modal
