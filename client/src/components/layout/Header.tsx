@@ -7,6 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import {Link} from "react-router-dom";
 import Auth from "../HOC/Auth";
+import Logout from "../Reusable/misc/Logout";
 
 
 const guestLinks: JSX.Element = (
@@ -19,11 +20,8 @@ const guestLinks: JSX.Element = (
         </Link>
     </>
 );
-const authLinks: JSX.Element = (
-    <>
-        <div>debil</div>
-    </>
-);
+
+const authLinks:JSX.Element = <Logout/>;
 
 const Header: React.FC = () => {
     return (
