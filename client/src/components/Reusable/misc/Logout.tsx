@@ -7,7 +7,7 @@ import {logOutUser} from "../../../action/authActions";
 
 //TODO make a gravatar instead of the icon if it is found
 const Logout:React.FC = () => {
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
 
@@ -47,7 +47,7 @@ const Logout:React.FC = () => {
                 onClose={handleClose}
             >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={()=>logOutUser()}>Logout</MenuItem>
+                <MenuItem onClick={()=>dispatch(logOutUser())}>Logout</MenuItem>
             </Menu>
         </>
 

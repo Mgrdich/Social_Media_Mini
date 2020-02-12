@@ -13,6 +13,7 @@ import {logOutUser, setCurrentUser} from "./action/authActions";
 import {setAuthToken} from "./util/functions";
 import jwt_decode from "jwt-decode";
 import Dashboard from "./components/dashboard";
+import {clearCurrentProfile} from "./action/profileActions";
 
 if (localStorage.token) {
     // Set auth token header auth
@@ -25,9 +26,8 @@ if (localStorage.token) {
     const currentTime = Date.now() / 1000;
     if (decoded.exp < currentTime) {
         // Logout user
-        logOutUser();
-        // TODO: Clear current Profile
-
+        store.dispatch(logOutUser());
+        store.dispatch(clearCurrentProfile());
         // Redirect to login
         window.location.href = '/login';
     }

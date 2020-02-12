@@ -18,12 +18,12 @@ const Login: React.FC<RouteComponentProps> = (props) => {
     const {handleSubmit, register, errors} = useForm<FormData>();
     const [serverError, setterError] = useServerErrorHandle();
     const isAuth  = useSelector<any>(state => state.auth.isAuthenticated);
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     const onSubmit = function (values: any) {
         axios.post(`${URL}/users/login`, values)
             .then(function (res: any) {
-                loginUser(res);
+                dispatch(loginUser(res));
             }).catch(function (e: any) {
             if (!e.response.data) {
                 console.error("No Response is found");
