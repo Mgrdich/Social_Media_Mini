@@ -2,7 +2,7 @@ import React from 'react';
 import {useSelector} from "react-redux";
 
 interface IIsAuth {
-    ElementWithAuth?: any;
+    ElementWithAuth?: React.ReactNode;
     ElementNoAuth?: any;
 }
 
