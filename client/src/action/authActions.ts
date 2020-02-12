@@ -1,16 +1,18 @@
 import {SET_CURRENT_USER} from "./types";
 import {setAuthToken} from "../util/functions";
 import jwt_decode from "jwt-decode";
+import {Dispatch} from 'redux';
 
 
 export const setCurrentUser = function (decoded: any) {
     return {
         type: SET_CURRENT_USER,
         payload: decoded
-    }
+    };
 };
 
-export const loginUser = function (userData: any) {
+
+export const loginUser = (userData: any) => (dispatch: Dispatch) => {
     const {token} = userData.data;
     //creating the token in ls
     localStorage.setItem('token', token); //TODO Replace it with unique shit
@@ -19,14 +21,15 @@ export const loginUser = function (userData: any) {
     //decode the token
     const decoded = jwt_decode(token);
 
-    return setCurrentUser(decoded);
+    dispatch(setCurrentUser(decoded));
 };
 
 
-export const logOutUser = function () {
-    if(localStorage.token) {
+export const logOutUser = () => (dispatch: Dispatch) => {
+
+    if (localStorage.token) {
         localStorage.removeItem('token');
     }
     setAuthToken();
-    return setCurrentUser({});
+    dispatch(setCurrentUser({}));
 };
