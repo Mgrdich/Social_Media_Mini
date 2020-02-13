@@ -1,6 +1,6 @@
 import {CLEAR_CURRENT_PROFILE, GET_PROFILE, PROFILE_LOADING} from "../action/types";
 
-interface IProfileReducer {
+export interface IProfileReducer {
     profile: any;
     profiles: Array<any>;
     loading: boolean;

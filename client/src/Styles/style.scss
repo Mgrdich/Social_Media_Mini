@@ -88,7 +88,9 @@ footer {
     margin: 0 auto;
   }
 }
-
+h1 {
+  text-align: center;
+}
 .loginRegister {
   h1 {
     text-align: center;
@@ -121,4 +123,9 @@ footer {
   &.flexGrow {
     flex-grow: 1;
   }
+}
+
+.Loader {
+  display: flex;
+  justify-content: center;
 }
