@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route} from "react-router";
+import {Switch} from "react-router";
 import Landing from "./components/Landing";
 import {ThemeProvider} from '@material-ui/core'; //TODO check performance
 import {theme} from "./Theme";
@@ -14,6 +14,8 @@ import {setAuthToken} from "./util/functions";
 import jwt_decode from "jwt-decode";
 import Dashboard from "./components/dashboard";
 import {clearCurrentProfile} from "./action/profileActions";
+import PublicRoute from "./components/HOC/Auth/PublicRoute";
+import PrivateRoute from "./components/HOC/Auth/PrivateRoute";
 
 if (localStorage.token) {
     // Set auth token header auth
@@ -40,14 +42,22 @@ const App: React.FC = () => {
         <Provider store={store}>
             <BrowserRouter>
                 <ThemeProvider theme={theme}>
+
+                    <Switch>
                     <HeaderFooterLayout>
-                        <Route exact path="/" component={Landing}/>
-                        <Route exact path="/dashboard" component={Dashboard}/>
+                        <PrivateRoute exact path="/dashboard" component={Dashboard}/>
                     </HeaderFooterLayout>
-                    <div className="loginRegister">
-                        <Route exact path="/login" component={Login}/>
-                        <Route exact path="/register" component={Register}/>
-                    </div>
+                    </Switch>
+
+                    <Switch>
+                        <PublicRoute exact path="/" component={Landing}/>
+
+                        <div className="loginRegister">
+                            <PublicRoute exact path="/login" component={Login}/>
+                            <PublicRoute exact path="/register" component={Register}/>
+                        </div>
+
+                    </Switch>
                 </ThemeProvider>
             </BrowserRouter>
         </Provider>

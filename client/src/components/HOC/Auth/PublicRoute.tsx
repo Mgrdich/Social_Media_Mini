@@ -1,9 +1,9 @@
 import React from 'react';
-import {Redirect, Route, RouteComponentProps} from "react-router";
+import {Redirect, Route, RouteProps} from "react-router";
 import {useSelector} from "react-redux";
 
-interface IPublicRoute extends RouteComponentProps {
-    component: React.ComponentType;
+interface IPublicRoute extends RouteProps {
+    component: React.ComponentType<any>;
 }
 
 
