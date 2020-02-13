@@ -1,15 +1,15 @@
 import React from 'react';
 import {useSelector} from "react-redux";
-import {Redirect, Route, RouteComponentProps} from "react-router";
+import {Redirect, Route, RouteComponentProps, RouteProps} from "react-router";
 
-interface IPrivateRoute extends RouteComponentProps {
-    component: any;
+interface IPrivateRoute extends RouteProps {
+    Component: React.ComponentType<any>;
     allowedRoles?: Array<string>;
 }
 
 
 //Route is Accessible only when your Authenticated and have the permissions
-const PrivateRoute: React.FC<IPrivateRoute> = ({component: Component, allowedRoles, ...rest}) => {
+const PrivateRoute: React.FC<IPrivateRoute> = ({Component, allowedRoles, ...rest}) => {
     const isAuth = useSelector<any>(state => state.auth.isAuthenticated);
     const role = useSelector<any>(state => state.auth.user.role);
 
