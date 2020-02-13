@@ -1,29 +1,36 @@
 import {CLEAR_CURRENT_PROFILE, GET_PROFILE, PROFILE_LOADING} from "./types";
-import {Dispatch} from "redux";
+import {Action, ActionCreator, Dispatch} from "redux";
 import axios from "axios";
+import {URL} from "../config/config";
 
-export const setProfileLoading = () => {
+export const setProfileLoading: ActionCreator<Action> = () => {
     return {
         type: PROFILE_LOADING
     };
 };
 
-export const getCurrentProfile = () => (dispatch: Dispatch) => {
+export const getCurrentProfile: ActionCreator<void> = () => (dispatch: Dispatch) => {
     dispatch(setProfileLoading());
-    axios.get('/api/profile').then((res: any) =>
+    console.log(`${URL}/profile`);
+    axios.get(`${URL}/profile`).then((res: any) => {
+            console.log(res);
             dispatch({
                 type: GET_PROFILE,
                 payload: res.data
             })
-        ).catch((err: any) =>
+        }
+    ).catch((err: any) => {
             dispatch({
                 type: GET_PROFILE,
-                payload: {}
+                payload: {
+                    errMessage: err.response.data.message
+                }
             })
-        );
+        }
+    )
 };
 
-export const clearCurrentProfile = () => { //outside of react-redux LifeCycle
+export const clearCurrentProfile: ActionCreator<Action> = () => { //outside of react-redux LifeCycle
     return {
         type: CLEAR_CURRENT_PROFILE
     };

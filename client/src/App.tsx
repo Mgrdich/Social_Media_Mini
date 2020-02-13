@@ -42,7 +42,7 @@ const App: React.FC = () => {
                 <ThemeProvider theme={theme}>
                     <HeaderFooterLayout>
                         <Route exact path="/" component={Landing}/>
-                        <Route exact path="/" component={Dashboard}/>
+                        <Route exact path="/dashboard" component={Dashboard}/>
                     </HeaderFooterLayout>
                     <div className="loginRegister">
                         <Route exact path="/login" component={Login}/>
