@@ -5,7 +5,7 @@ export function withClass<P extends object>(className: string) { //with empty Ar
         return function (props: P) {
             return (
                 <div className={className}>
-                    <WrappedComponent {...props}/>
+                    <WrappedComponent {...props as P}/>
                 </div>
             )
         }

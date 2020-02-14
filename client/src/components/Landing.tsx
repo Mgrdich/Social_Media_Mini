@@ -1,5 +1,5 @@
 import React from 'react';
-import cupcakeSrc from "../images/cupcake.svg";
+// import cupcakeSrc from "../images/cupcake.svg";
 import ButtonLink from "./Reusable/ButtonLink";
 import Auth from "./HOC/Auth/Auth";
 
@@ -22,7 +22,7 @@ const Landing: React.FC = () => {
             </p>
             <Auth ElementNoAuth={Btns}/>
             <div className="image">
-                <img src={cupcakeSrc} alt=""/>
+
             </div>
         </div>
     );

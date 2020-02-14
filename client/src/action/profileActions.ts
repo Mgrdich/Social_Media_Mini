@@ -22,9 +22,7 @@ export const getCurrentProfile: ActionCreator<ThunkAction<void, any, null, AnyAc
     ).catch((err: any) => {
             dispatch({
                 type: GET_PROFILE,
-                payload: {
-                    errMessage: err.response.data.message
-                }
+                errMessage: err.response.data.message
             })
         }
     )

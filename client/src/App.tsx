@@ -1,7 +1,7 @@
 import React from 'react';
 import {ThemeProvider} from '@material-ui/core'; //TODO check performance
 import {theme} from "./Theme";
-import {BrowserRouter} from "react-router-dom";
+import {Router} from "react-router-dom";
 import HeaderFooterLayout from "./components/HOC/HeaderFooterLayout";
 import {Provider} from "react-redux";
 import {store} from "./store";
@@ -10,6 +10,7 @@ import {setAuthToken} from "./util/functions";
 import jwt_decode from "jwt-decode";
 import {clearCurrentProfile} from "./action/profileActions";
 import Routes from "./Routes";
+import history from "./util/history";
 
 if (localStorage.token) {
     // Set auth token header auth
@@ -34,13 +35,13 @@ const App: React.FC = () => {
     return (
 
         <Provider store={store}>
-            <BrowserRouter>
+            <Router history={history}>
                 <ThemeProvider theme={theme}>
                     <HeaderFooterLayout>
                         <Routes/>
                     </HeaderFooterLayout>
                 </ThemeProvider>
-            </BrowserRouter>
+            </Router>
         </Provider>
     );
 };

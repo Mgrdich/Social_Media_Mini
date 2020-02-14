@@ -24,8 +24,9 @@ export default function (state: IProfileReducer = initialState, action: any) {
         case GET_PROFILE:
             return {
                 ...state,
-                profile: action.payload,
-                loading: false
+                profile: (action.payload) ? action.payload : {},
+                loading: false,
+                errMessage: action.errMessage
             };
         case CLEAR_CURRENT_PROFILE:
             return {

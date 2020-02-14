@@ -19,7 +19,7 @@ const Dashboard: React.FC = () => {
     if (isLoading || profile === null) {
         dashboardContent = <Loader size={55}/>
     } else {
-        if (Object.keys(profile).length > 1) {
+        if (Object.keys(profile).length > 0) {
             dashboardContent = <h4>TODO: DISPLAY PROFILE</h4>;
         } else {
             dashboardContent = (

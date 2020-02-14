@@ -3,6 +3,7 @@ import {setAuthToken} from "../util/functions";
 import jwt_decode from "jwt-decode";
 import {Action, ActionCreator, AnyAction, Dispatch} from 'redux';
 import {ThunkAction} from "redux-thunk";
+import history from "../util/history";
 
 
 export const setCurrentUser: ActionCreator<Action> = function (decoded: any) {
@@ -21,8 +22,8 @@ export const loginUser: ActionCreator<ThunkAction<void, any, any, AnyAction>> = 
     setAuthToken(token);
     //decode the token
     const decoded = jwt_decode(token);
-    console.log(decoded);
     dispatch(setCurrentUser(decoded));
+    history.push('/dashboard');
 };
 
 

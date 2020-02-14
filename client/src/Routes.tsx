@@ -19,7 +19,7 @@ const Routes: React.FC = () => {
         <Switch>
             <PrivateRoute exact path="/dashboard" component={Dashboard}/>
 
-            <Route exact path="/" component={Landing}/>
+            <PublicRoute exact path="/" component={Landing}/>
 
             <PublicRoute exact path="/login" component={LoginWithClassName}/>
             <PublicRoute exact path="/register" component={RegisterWithClassName}/>
