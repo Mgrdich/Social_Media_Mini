@@ -12,10 +12,10 @@ const PublicRoute: React.FC<IPublicRoute> = ({component: Component, ...rest}) =>
     const isAuth = useSelector<any>(state => state.auth.isAuthenticated);
 
     return (
-        <Route {...rest} render={(props) => (isAuth) ?
+        <Route {...rest} render={(props) => (!isAuth) ?
             (<Component {...rest}/>) :
             (
-                <Redirect to="/login"/>
+                <Redirect to="/404"/>
             )}
         />
     );

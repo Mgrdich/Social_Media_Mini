@@ -3,7 +3,6 @@ import React from "react";
 
 
 //Check for performance
-//TODO make it curry roles as a first parameter
 export function Authorization<P extends object>(allowedRoles?: Array<string>) { //with empty Array only Authntication check
     return function (WrappedComponent: React.ComponentType<P>): React.FC<P> {
         return function WithAuthorization(props: P) {
