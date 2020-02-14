@@ -1,7 +1,8 @@
 import {CLEAR_CURRENT_PROFILE, GET_PROFILE, PROFILE_LOADING} from "./types";
-import {Action, ActionCreator, Dispatch} from "redux";
+import {Action, ActionCreator, AnyAction, Dispatch} from "redux";
 import axios from "axios";
 import {URL} from "../config/config";
+import {ThunkAction} from "redux-thunk";
 
 export const setProfileLoading: ActionCreator<Action> = () => {
     return {
@@ -9,9 +10,8 @@ export const setProfileLoading: ActionCreator<Action> = () => {
     };
 };
 
-export const getCurrentProfile: ActionCreator<void> = () => (dispatch: Dispatch) => {
+export const getCurrentProfile: ActionCreator<ThunkAction<void, any, null, AnyAction>> = () => (dispatch: Dispatch) => {
     dispatch(setProfileLoading());
-    console.log(`${URL}/profile`);
     axios.get(`${URL}/profile`).then((res: any) => {
             console.log(res);
             dispatch({
