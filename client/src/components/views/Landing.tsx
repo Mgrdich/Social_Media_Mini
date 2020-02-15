@@ -1,7 +1,7 @@
 import React from 'react';
-// import cupcakeSrc from "../images/cupcake.svg";
-import ButtonLink from "./Reusable/ButtonLink";
-import Auth from "./HOC/Auth/Auth";
+// import cupcakeSrc from "../images/cupcake.svg"; //TODO Check the image issue
+import ButtonLink from "../Reusable/ButtonLink";
+import Auth from "../HOC/Auth/Auth";
 
 const Btns:JSX.Element = (
     <div className="registerBtns">

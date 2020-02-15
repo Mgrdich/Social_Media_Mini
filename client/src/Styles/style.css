@@ -78,18 +78,18 @@ h1 {
 .loginRegister h1 {
   text-align: center; }
 
-.loginRegister .form {
+.form {
   margin: 0 auto;
   width: 25%; }
 
-.loginRegister .form form {
+.form form {
   display: flex;
   flex-direction: column; }
 
-.loginRegister .form form .MuiFormControl-root:not(:first-child) {
+.form form .MuiFormControl-root:not(:first-child) {
   margin-top: 30px; }
 
-.loginRegister .form form .submitBtn {
+.form form .submitBtn {
   margin-top: 40px; }
 
 .flex {

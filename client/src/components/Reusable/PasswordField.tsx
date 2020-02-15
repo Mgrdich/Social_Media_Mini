@@ -4,12 +4,12 @@ import {FormControl, FormHelperText, IconButton, InputAdornment, InputLabel, Out
 
 interface IPasswordField {
     id?:string
-    label: string;
+    label: string; //TODO id ref like dropdown
     error?: boolean;
     name: string;
     inputRef?: any;
     helperText?: string | boolean;
-    labelWidth?:number;
+    labelWidth?:number; //TODO do it with offset width
 }
 
 const PasswordField: React.FC<IPasswordField> = (props) => {

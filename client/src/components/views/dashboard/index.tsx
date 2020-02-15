@@ -1,11 +1,11 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {getCurrentProfile} from "../action/profileActions";
+import {getCurrentProfile} from "../../../action/profileActions";
 import {Container} from "@material-ui/core";
-import ButtonLink from "./Reusable/ButtonLink";
-import Loader from "./Reusable/Loader";
+import ButtonLink from "../../Reusable/ButtonLink";
+import Loader from "../../Reusable/Loader";
 
-const Dashboard: React.FC = () => {
+const Index: React.FC = () => {
     const dispatch = useDispatch();
     const profile: any = useSelector<any>(state => state.profile.profile);
     const isLoading: unknown = useSelector<any>(state => state.profile.loading);
@@ -42,4 +42,4 @@ const Dashboard: React.FC = () => {
     );
 };
 
-export default Dashboard;
+export default Index;

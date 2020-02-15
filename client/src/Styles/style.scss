@@ -95,20 +95,21 @@ h1 {
   h1 {
     text-align: center;
   }
-  .form {
-    margin: 0 auto;
-    width: 25%;
-    form {
-      display: flex;
-      flex-direction: column;
-      .MuiFormControl-root {
-        &:not(:first-child) {
-          margin-top: 30px;
-        }
+}
+
+.form {
+  margin: 0 auto;
+  width: 25%;
+  form {
+    display: flex;
+    flex-direction: column;
+    .MuiFormControl-root {
+      &:not(:first-child) {
+        margin-top: 30px;
       }
-      .submitBtn {
-        margin-top: 40px;
-      }
+    }
+    .submitBtn {
+      margin-top: 40px;
     }
   }
 }
