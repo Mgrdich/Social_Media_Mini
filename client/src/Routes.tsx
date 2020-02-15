@@ -1,13 +1,14 @@
 import React from 'react';
 import PrivateRoute from "./components/HOC/Auth/PrivateRoute";
-import Dashboard from "./components/dashboard";
+import Index from "./components/views/dashboard";
 import {Redirect, Route, RouteComponentProps, Switch} from "react-router";
-import Landing from "./components/Landing";
+import Landing from "./components/views/Landing";
 import PublicRoute from "./components/HOC/Auth/PublicRoute";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Error from "./components/error";
 import {withClass} from "./components/HOC/withClass";
+import CreateProfile from "./components/views/create-profile";
 
 const withLoginRegisterClassName = withClass<RouteComponentProps>("loginRegister");
 const LoginWithClassName = withLoginRegisterClassName(Login);
@@ -17,7 +18,8 @@ const RegisterWithClassName = withLoginRegisterClassName(Register);
 const Routes: React.FC = () => {
     return (
         <Switch>
-            <PrivateRoute exact path="/dashboard" component={Dashboard}/>
+            <PrivateRoute exact path="/dashboard" component={Index}/>
+            <PrivateRoute exact path="/create-profile" component={CreateProfile}/>
 
             <PublicRoute exact path="/" component={Landing}/>
 

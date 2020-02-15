@@ -3,3 +3,9 @@ export interface InputField {
     type?: "textArea" | "select";
     placeholder: string;
 }
+
+export interface dropdownDataType  {
+    value: number | string;
+    placeholder: string;
+    id?:string;
+}
