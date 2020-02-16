@@ -15,7 +15,7 @@ export interface IDocUser extends Document, IUser {
 }
 
 
-export interface IProfile {
+export interface IProfile   {
     user: IDocUser["_id"];
     handle: string;
     skills: Array<string>;

@@ -2,26 +2,26 @@ import React from 'react';
 import {Button, TextField} from "@material-ui/core";
 import {useForm} from "react-hook-form";
 import {useServerErrorHandle} from "../../Hooks/useServerErrorHandle";
-import axios from "axios";
-import {URL} from "../../../config/config";
-import {loginUser} from "../../../action/authActions";
-import {useDispatch} from "react-redux";
 import {dropdownDataType, InputField} from "../../../interfaces/General";
 import Dropdown from "../../Reusable/Dropdown";
+import {RouteComponentProps} from "react-router";
+import {useDynamicFields} from "../../Hooks/useDynamicFields";
+import axios from "axios";
 
 type FormData = {
     [key: string]: string;
-    status: string;
 }
 const InputFields: Array<InputField> = [
     {
         name: 'handle',
-        placeholder: 'Profile Handle'
+        placeholder: 'Profile Handle',
+        required: true
     },
     {
         name: 'status',
         type: "select",
-        placeholder: 'Status'
+        placeholder: 'Status',
+        required: true
     },
     {
         name: 'company',
@@ -37,7 +37,8 @@ const InputFields: Array<InputField> = [
     },
     {
         name: 'skills',
-        placeholder: 'skills'
+        placeholder: 'skills',
+        required: true
     },
     {
         name: 'githubusername',
@@ -63,15 +64,15 @@ const status: Array<dropdownDataType> = [
 ];
 
 
-const CreateProfile: React.FC = () => {
-    const {handleSubmit, register, errors} = useForm<any>();
+const CreateProfile: React.FC<RouteComponentProps> = (props) => {
+    const {handleSubmit, register, errors, unregister, control} = useForm<FormData>();
     const [serverError, setterError] = useServerErrorHandle();
-    const dispatch = useDispatch();
+    useDynamicFields(InputFields, register, unregister);
 
     const onSubmit = function (values: any) {
-        axios.post(`${URL}/users/login`, values)
+        axios.post(`${URL}/profile`, values)
             .then(function (res: any) {
-                dispatch(loginUser(res));
+                props.history.push('/');//TODO change it later
             }).catch(function (e: any) {
             if (!e.response.data) {
                 console.error("No Response is found");
@@ -80,6 +81,7 @@ const CreateProfile: React.FC = () => {
         });
     };
 
+    //TODO make the group of inputs into a function or a component
 
     return (
         <>
@@ -89,9 +91,19 @@ const CreateProfile: React.FC = () => {
                     {
                         InputFields.map((item: InputField, index) => {
                             let errorName: any = errors[item.name];
+                            //TODO register equality should be all over here for more custom checking
                             if (item.type === 'select') {
                                 return (
-                                    <Dropdown id={item.name} label={item.placeholder} name={item.name} key={index} data={status}/>
+                                    <Dropdown
+                                        id={item.name}
+                                        label={item.placeholder}
+                                        name={item.name}
+                                        key={index}
+                                        data={status}
+                                        control={control}
+                                        error={!!errorName || `${item.name}` in serverError}
+                                        helperText={(!!errorName && errorName.message || (`${item.name}` in serverError && serverError[item.name]))}
+                                    />
                                 )
                             } else {
                                 return (
@@ -102,6 +114,10 @@ const CreateProfile: React.FC = () => {
                                         label={item.placeholder}
                                         variant="outlined"
                                         color="primary"
+                                        inputRef={(!item.required) ? register : register({
+                                            required: "This Field is Required"
+                                        })}
+                                        rows={(item.type === 'textArea') ? 4 : 1}
                                         error={!!errorName || `${item.name}` in serverError}
                                         helperText={(!!errorName && errorName.message || (`${item.name}` in serverError && serverError[item.name]))}
                                     />
