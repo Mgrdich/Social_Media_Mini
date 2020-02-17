@@ -4,12 +4,14 @@ import {getCurrentProfile} from "../../../action/profileActions";
 import {Container} from "@material-ui/core";
 import ButtonLink from "../../Reusable/ButtonLink";
 import Loader from "../../Reusable/Loader";
+import {Link} from "react-router-dom";
+import ProfileActions from "./ProfileActions";
 
 const Index: React.FC = () => {
     const dispatch = useDispatch();
     const profile: any = useSelector<any>(state => state.profile.profile);
     const isLoading: unknown = useSelector<any>(state => state.profile.loading);
-    const user:any = useSelector<any>(state => state.auth.user);
+    const user: any = useSelector<any>(state => state.auth.user);
     let dashboardContent: JSX.Element;
 
     useEffect(function () {
@@ -20,13 +22,21 @@ const Index: React.FC = () => {
         dashboardContent = <Loader size={55}/>
     } else {
         if (Object.keys(profile).length > 0) {
-            dashboardContent = <h4>TODO: DISPLAY PROFILE</h4>;
+            dashboardContent = (
+                <>
+                    <p>
+                        Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link>
+                    </p>
+                    <ProfileActions/>
+                </>
+            );
         } else {
             dashboardContent = (
                 <div>
                     <p className="lead text-muted">Welcome {user.name}</p>
                     <p>You have not yet setup a profile, please add some info</p>
-                    <ButtonLink color="primary" variant="contained" size="large" to='/create-profile'>Create Link</ButtonLink>
+                    <ButtonLink color="primary" variant="contained" size="large" to='/create-profile'>Create
+                        Link</ButtonLink>
                 </div>
             )
         }

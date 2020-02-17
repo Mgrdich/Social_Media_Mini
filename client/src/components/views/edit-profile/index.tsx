@@ -1,21 +1,20 @@
 import React from 'react';
+import DynamicFields from "../../Reusable/DynamicFields";
 import {Button, Checkbox} from "@material-ui/core";
 import {useForm} from "react-hook-form";
 import {useServerErrorHandle} from "../../Hooks/useServerErrorHandle";
-import {RouteComponentProps} from "react-router";
 import {useDynamicFields} from "../../Hooks/useDynamicFields";
+import {sanitizeFormValues} from "../../../util/functions";
 import axios from "axios";
 import {URL} from "../../../config/config";
-import {sanitizeFormValues} from "../../../util/functions";
-import DynamicFields from "../../Reusable/DynamicFields";
-import {InputFields, socialFields} from "./utilFields";
-
-type FormData = {
-    [key: string]: string;
-}
+import {InputField} from "../../../interfaces/General";
+import {InputFields,socialFields} from "../create-profile/utilFields";
+// import {store} from "./store";
 
 
-const CreateProfile: React.FC<RouteComponentProps> = (props) => {
+
+
+const EditProfile = () => {
     const {handleSubmit, register, errors, unregister, control} = useForm<FormData>();
     const [serverError, setterError] = useServerErrorHandle();
     const [checked, setChecked] = React.useState(false); //TODO Change the Checkbox Element with text
@@ -39,11 +38,9 @@ const CreateProfile: React.FC<RouteComponentProps> = (props) => {
         });
     };
 
-    //TODO make the group of inputs into a function or a component
-
     return (
         <>
-            <h1>Create Your Profile</h1>
+            <h1>Edit Your Profile</h1>
             <div className="form">
                 <form noValidate autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
                     <DynamicFields InputFields={InputFields} register={register} serverError={serverError}
@@ -69,4 +66,4 @@ const CreateProfile: React.FC<RouteComponentProps> = (props) => {
     );
 };
 
-export default CreateProfile;
+export default Index;

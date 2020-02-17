@@ -3,6 +3,8 @@ export interface InputField {
     type?: "textArea" | "select";
     placeholder: string;
     required?: boolean;
+    data?: Array<dropdownDataType>;
+    default?:any;
 }
 
 export interface dropdownDataType {
@@ -12,5 +14,5 @@ export interface dropdownDataType {
 }
 
 export interface keyValue {
-    [key:string]:string;
+    [key: string]: string;
 }
