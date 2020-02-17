@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, TextField} from "@material-ui/core";
+import {Button, Checkbox, TextField} from "@material-ui/core";
 import {useForm} from "react-hook-form";
 import {useServerErrorHandle} from "../../Hooks/useServerErrorHandle";
 import {dropdownDataType, InputField} from "../../../interfaces/General";
@@ -53,6 +53,35 @@ const InputFields: Array<InputField> = [
     }
 ];
 
+const socialFields: Array<InputField> = [
+    {
+        placeholder: 'Twitter',
+        name: 'twitter',
+    },
+
+    {
+        placeholder: 'Facebook',
+        name: 'facebook',
+    },
+
+    {
+        placeholder: 'Linkedin',
+        name: 'linkedin',
+    },
+
+    {
+        placeholder: 'YouTube',
+        name: 'youtube',
+    },
+
+    {
+        placeholder: 'Instagram',
+        name: 'instagram',
+    },
+];
+
+const mixedArray:Array<InputField> = [...InputFields, ...socialFields];
+
 const status: Array<dropdownDataType> = [
     {placeholder: 'Select Professional Status', value: 0},
     {placeholder: 'Developer', value: 'Developer'},
@@ -69,7 +98,12 @@ const status: Array<dropdownDataType> = [
 const CreateProfile: React.FC<RouteComponentProps> = (props) => {
     const {handleSubmit, register, errors, unregister, control} = useForm<FormData>();
     const [serverError, setterError] = useServerErrorHandle();
+    const [checked, setChecked] = React.useState(false); //TODO Change the Checkbox Element with text
     useDynamicFields(InputFields, register, unregister);
+
+    const handleChange = function (event: React.ChangeEvent<HTMLInputElement>) {
+        setChecked(event.target.checked);
+    };
 
     const onSubmit = function (values: any) {
         const sanitizedValues = sanitizeFormValues(values);
@@ -93,7 +127,7 @@ const CreateProfile: React.FC<RouteComponentProps> = (props) => {
             <div className="form">
                 <form noValidate autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
                     {
-                        InputFields.map((item: InputField, index) => {
+                        mixedArray.map((item: InputField, index) => {
                             let errorName: any = errors[item.name];
                             //TODO register equality should be all over here for more custom checking
                             if (item.type === 'select') {
@@ -110,26 +144,37 @@ const CreateProfile: React.FC<RouteComponentProps> = (props) => {
                                     />
                                 )
                             } else {
-                                return (
-                                    <TextField
-                                        key={index}
-                                        id={item.name}
-                                        name={item.name}
-                                        label={item.placeholder}
-                                        variant="outlined"
-                                        color="primary"
-                                        inputRef={(!item.required) ? register : register({
-                                            required: "This Field is Required"
-                                        })}
-                                        rows={(item.type === 'textArea') ? 4 : 1}
-                                        error={!!errorName || `${item.name}` in serverError}
-                                        helperText={(!!errorName && errorName.message || (`${item.name}` in serverError && serverError[item.name]))}
-                                    />
-                                )
+                                if (index < InputFields.length || checked) {
+                                    return (
+                                        <TextField
+                                            key={index}
+                                            id={item.name}
+                                            name={item.name}
+                                            label={item.placeholder}
+                                            variant="outlined"
+                                            color="primary"
+                                            inputRef={(!item.required) ? register : register({
+                                                required: "This Field is Required"
+                                            })}
+                                            rows={(item.type === 'textArea') ? 4 : 1}
+                                            error={!!errorName || `${item.name}` in serverError}
+                                            helperText={(!!errorName && errorName.message || (`${item.name}` in serverError && serverError[item.name]))}
+                                        />
+                                    )
+                                }
                             }
                         })
                     }
-                    <Button color="primary" variant="contained" size="large" className="submitBtn" type="submit">OK</Button>
+                    <span> Add Socials
+                        <Checkbox
+                            checked={checked}
+                            onChange={handleChange}
+                            color="primary"
+                            inputProps={{'aria-label': 'primary checkbox'}}
+                        />
+                    </span>
+                    <Button color="primary" variant="contained" size="large" className="submitBtn"
+                            type="submit">OK</Button>
                 </form>
             </div>
         </>
