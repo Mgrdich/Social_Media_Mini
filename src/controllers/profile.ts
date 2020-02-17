@@ -84,8 +84,9 @@ async function createProfile(req: Request, res: Response, next: NextFunction): P
         status,
         skills: skills.split(', ')
     };
-    profileFields = {...profileFields,...req.body};
+    profileFields = {...profileFields};
     // Social
+    profileFields.social = {};
     if (youtube) {
         profileFields.social.youtube = youtube;
     }
