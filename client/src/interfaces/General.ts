@@ -10,3 +10,7 @@ export interface dropdownDataType {
     placeholder: string;
     id?: string;
 }
+
+export interface keyValue {
+    [key:string]:string;
+}

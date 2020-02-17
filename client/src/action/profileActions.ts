@@ -13,7 +13,6 @@ export const setProfileLoading: ActionCreator<Action> = () => {
 export const getCurrentProfile: ActionCreator<ThunkAction<void, any, null, AnyAction>> = () => (dispatch: Dispatch) => {
     dispatch(setProfileLoading());
     axios.get(`${URL}/profile`).then((res: any) => {
-            console.log(res);
             dispatch({
                 type: GET_PROFILE,
                 payload: res.data

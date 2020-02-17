@@ -13,7 +13,7 @@ const PublicRoute: React.FC<IPublicRoute> = ({component: Component, ...rest}) =>
 
     return (
         <Route {...rest} render={(props) => (!isAuth) ?
-            (<Component {...rest}/>) :
+            (<Component {...props}/>) :
             (
                 <Redirect to="/404"/>
             )}

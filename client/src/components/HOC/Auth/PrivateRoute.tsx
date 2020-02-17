@@ -1,11 +1,12 @@
 import React from 'react';
 import {useSelector} from "react-redux";
-import {Redirect, Route, RouteProps} from "react-router";
+import {Redirect, Route, RouteComponentProps, RouteProps} from "react-router";
 
 interface IPrivateRoute extends RouteProps {
     component: React.ComponentType<any>;
     allowedRoles?: Array<string>;
 }
+//TODO add component props
 
 
 //Route is Accessible only when your Authenticated and have the permissions
@@ -16,8 +17,8 @@ const PrivateRoute: React.FC<IPrivateRoute> = ({component: Component, allowedRol
     const routePermission: boolean = (allowedRoles) ? (isAuth && allowedRoles.includes(role as string)) : !!isAuth;
 
     return (
-        <Route {...rest} render={(props) => (routePermission) ?
-            (<Component {...rest}/>) :
+        <Route {...rest} render={(props:RouteComponentProps) => (routePermission) ?
+            (<Component {...props}/>) :
             (
                 <Redirect to="/login"/>
             )}

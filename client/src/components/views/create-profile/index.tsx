@@ -7,6 +7,8 @@ import Dropdown from "../../Reusable/Dropdown";
 import {RouteComponentProps} from "react-router";
 import {useDynamicFields} from "../../Hooks/useDynamicFields";
 import axios from "axios";
+import {URL} from "../../../config/config";
+import {sanitizeFormValues} from "../../../util/functions";
 
 type FormData = {
     [key: string]: string;
@@ -70,14 +72,16 @@ const CreateProfile: React.FC<RouteComponentProps> = (props) => {
     useDynamicFields(InputFields, register, unregister);
 
     const onSubmit = function (values: any) {
-        axios.post(`${URL}/profile`, values)
+        const sanitizedValues = sanitizeFormValues(values);
+
+        axios.post(`${URL}/profile`, sanitizedValues)
             .then(function (res: any) {
-                props.history.push('/');//TODO change it later
+                props.history.push('/dashboard');
             }).catch(function (e: any) {
             if (!e.response.data) {
                 console.error("No Response is found");
             }
-            setterError(e.response.data);
+            setterError(e.response.data.data);
         });
     };
 
@@ -125,8 +129,7 @@ const CreateProfile: React.FC<RouteComponentProps> = (props) => {
                             }
                         })
                     }
-                    <Button color="primary" variant="contained" size="large" className="submitBtn"
-                            type="submit">OK</Button>
+                    <Button color="primary" variant="contained" size="large" className="submitBtn" type="submit">OK</Button>
                 </form>
             </div>
         </>
