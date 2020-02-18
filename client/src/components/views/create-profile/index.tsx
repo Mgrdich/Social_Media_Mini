@@ -39,7 +39,7 @@ const CreateProfile: React.FC<RouteComponentProps> = (props) => {
         });
     };
 
-    //TODO make the group of inputs into a function or a component
+    //TODO edit and create pages refactor
 
     return (
         <>

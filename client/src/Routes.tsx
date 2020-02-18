@@ -9,6 +9,7 @@ import Register from "./components/auth/Register";
 import Error from "./components/error";
 import {withClass} from "./components/HOC/withClass";
 import CreateProfile from "./components/views/create-profile";
+import EditProfile from "./components/views/edit-profile";
 
 const withLoginRegisterClassName = withClass<RouteComponentProps>("loginRegister");
 const LoginWithClassName = withLoginRegisterClassName(Login);
@@ -20,6 +21,7 @@ const Routes: React.FC = () => {
         <Switch>
             <PrivateRoute exact path="/dashboard" component={Index}/>
             <PrivateRoute exact path="/create-profile" component={CreateProfile}/>
+            <PrivateRoute exact path="/edit-profile" component={EditProfile}/>
 
             <PublicRoute exact path="/" component={Landing}/>
 

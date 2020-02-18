@@ -22,6 +22,7 @@ const DynamicFields: React.FC<IDynamicFields> = (props) => {
                     if (item.type === 'select') {
                         return (
                             <Dropdown
+                                defaultValue={item.default}
                                 id={item.name}
                                 label={item.placeholder}
                                 name={item.name}
@@ -35,6 +36,7 @@ const DynamicFields: React.FC<IDynamicFields> = (props) => {
                     } else {
                         return (
                             <TextField
+                                defaultValue={item.default}
                                 key={index}
                                 id={item.name}
                                 name={item.name}

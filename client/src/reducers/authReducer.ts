@@ -6,12 +6,12 @@ interface IAuthReducer {
     user: any;
 }
 
-const initalState: IAuthReducer = {
+const initialState: IAuthReducer = {
     isAuthenticated: false,
     user: {}
 };
 
-export default function (state: IAuthReducer = initalState, action: any) {
+export default function (state: IAuthReducer = initialState, action: any) {
     switch (action.type) {
         case SET_CURRENT_USER:
             return {
