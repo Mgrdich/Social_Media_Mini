@@ -41,8 +41,24 @@ const Experience: React.FC<RouteComponentProps> = (props) => {
                     <DynamicFields InputFields={experienceInputFields} register={register} serverError={serverError}
                                    errors={errors} control={control}/>
 
-                    <DatePicker format="MM/dd/yyyy" id="From" label="From" defaultDate={new Date()} name="From" control={control}/>
-                    <DatePicker format="MM/dd/yyyy" id="to" label="To" defaultDate={null} name="To" control={control} disabled={checked}/>
+                    <DatePicker
+                        format="MM/dd/yyyy"
+                        id="from"
+                        label="From"
+                        defaultDate={new Date()}
+                        name="from" control={control}
+                        error={"from" in serverError}
+                        helperText={("from" in serverError && serverError.from)}
+                    />
+                    <DatePicker
+                        format="MM/dd/yyyy"
+                        id="to"
+                        label="To"
+                        defaultDate={null}
+                        name="from" control={control}
+                        error={"to" in serverError}
+                        helperText={("to" in serverError && serverError.to)}
+                    />
                     <span> Current Job
                         <Checkbox
                             checked={checked}

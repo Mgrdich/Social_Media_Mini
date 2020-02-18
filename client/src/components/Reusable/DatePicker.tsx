@@ -12,6 +12,7 @@ interface IDatePicker {
     name: string;
     disabled?: boolean;
     helperText?: string;
+    error?:boolean;
 }
 
 const DatePicker: React.FC<IDatePicker> = (props) => { //TODO Replace with real date Picker
@@ -39,6 +40,7 @@ const DatePicker: React.FC<IDatePicker> = (props) => { //TODO Replace with real 
                         InputAdornmentProps={{position: "start"}}
                         onChange={date => handleDateChange(date)}
                         helperText={props.helperText}
+                        error={props.error}
                     />}
             />
         </MuiPickersUtilsProvider>
