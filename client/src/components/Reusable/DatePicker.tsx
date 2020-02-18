@@ -1,33 +1,43 @@
 import React from 'react';
 import DateFnsUtils from '@date-io/date-fns';
 import {KeyboardDatePicker, MuiPickersUtilsProvider,} from '@material-ui/pickers';
+import {Controller} from "react-hook-form";
 
 interface IDatePicker {
     format?: string;
     id: string;
     label: string;
+    defaultDate: Date | null;
+    control:any;
+    name:string;
 }
 
 const DatePicker: React.FC<IDatePicker> = (props) => {
     const [selectedDate, setSelectedDate] = React.useState<Date | null>(
-        new Date(),
+        props.defaultDate
     );
     const handleDateChange = (date: Date | null) => {
         setSelectedDate(date);
     };
     return (
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <KeyboardDatePicker
-                id={props.id}
-                label={props.label}
-                autoOk
-                variant="inline"
-                inputVariant="outlined"
-                format={props.format ? props.format : "MM/dd/yyyy"}
-                value={selectedDate}
-                InputAdornmentProps={{position: "start"}}
-                onChange={date => handleDateChange(date)}
+            <Controller
+                control={props.control} name={props.name}
+                defaultValue={selectedDate}
+                as={
+                    <KeyboardDatePicker
+                        id={props.id}
+                        label={props.label}
+                        autoOk
+                        variant="inline"
+                        inputVariant="outlined"
+                        format={props.format ? props.format : "MM/dd/yyyy"}
+                        value={selectedDate}
+                        InputAdornmentProps={{position: "start"}}
+                        onChange={date => handleDateChange(date)}
+                    />}
             />
+
         </MuiPickersUtilsProvider>
     );
 };

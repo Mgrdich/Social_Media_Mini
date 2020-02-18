@@ -34,7 +34,7 @@ export const educationInputFields: Array<InputField> = [
     },
     {
         placeholder: "* Field of Study",
-        name: "fieldofstudy",
+        name: "fieldOfStudy",
         required: true
     },
     {

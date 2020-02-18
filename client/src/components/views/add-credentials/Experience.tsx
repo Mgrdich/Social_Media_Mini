@@ -8,6 +8,8 @@ import {useDynamicFields} from "../../Hooks/useDynamicFields";
 import {sanitizeFormValues} from "../../../util/functions";
 import axios from "axios";
 import {URL} from "../../../config/config";
+import {Button} from "@material-ui/core";
+import DatePicker from "../../Reusable/DatePicker";
 
 const Experience: React.FC<RouteComponentProps> = (props) => {
     const {handleSubmit, register, errors, unregister, control} = useForm<FormData>();
@@ -17,7 +19,8 @@ const Experience: React.FC<RouteComponentProps> = (props) => {
 
     const onSubmit = function (values: any) {
         const sanitizedValues = sanitizeFormValues(values);
-
+        console.log(values);
+/*
         axios.post(`${URL}/profile//experience`, sanitizedValues)
             .then(function (res: any) {
                 props.history.push('/dashboard');
@@ -27,6 +30,7 @@ const Experience: React.FC<RouteComponentProps> = (props) => {
             }
             setterError(e.response.data.data);
         });
+*/
     };
 
 
@@ -39,6 +43,10 @@ const Experience: React.FC<RouteComponentProps> = (props) => {
                 <form noValidate autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
                     <DynamicFields InputFields={experienceInputFields} register={register} serverError={serverError}
                                    errors={errors} control={control}/>
+                    <DatePicker format="MM/dd/yyyy" id="From" label="From" defaultDate={new Date()} name="From" control={control}/>
+                    <DatePicker format="MM/dd/yyyy" id="to" label="To" defaultDate={null} name="To" control={control}/>
+                    <Button color="primary" variant="contained" size="large" className="submitBtn"
+                            type="submit">OK</Button>
                 </form>
             </div>
         </>

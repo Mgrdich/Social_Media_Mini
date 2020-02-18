@@ -10,6 +10,7 @@ import {URL} from "../../../config/config";
 import DynamicFields from "../../Reusable/DynamicFields";
 import DatePicker from "../../Reusable/DatePicker";
 import {KeyboardDatePicker} from "@material-ui/pickers";
+import {Button} from "@material-ui/core";
 
 const Education:React.FC<RouteComponentProps> = (props) => {
     const {handleSubmit, register, errors, unregister, control} = useForm<FormData>();
@@ -40,9 +41,7 @@ const Education:React.FC<RouteComponentProps> = (props) => {
                 <form noValidate autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
                     <DynamicFields InputFields={educationInputFields} register={register} serverError={serverError}
                                    errors={errors} control={control}/>
-                    <DatePicker format="MM/dd/yyyy" id="From" label="From"/>
-                    <DatePicker format="MM/dd/yyyy" id="to" label="To"/>
-                </form>
+                  </form>
             </div>
         </>
     );
