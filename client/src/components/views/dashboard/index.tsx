@@ -6,6 +6,7 @@ import ButtonLink from "../../Reusable/ButtonLink";
 import Loader from "../../Reusable/Loader";
 import {Link} from "react-router-dom";
 import ProfileActions from "./ProfileActions";
+import DashboardTable from "./dashboardTable";
 
 const Index: React.FC = () => {
     const dispatch = useDispatch();
@@ -28,6 +29,12 @@ const Index: React.FC = () => {
                         Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link>
                     </p>
                     <ProfileActions/>
+                    <DashboardTable
+                        thead={['School','Degree','Years']}
+                        tbody={['school','degree','from']}
+                        data={profile.education}
+                        style={{marginTop:10}}
+                    />
                 </>
             );
         } else {

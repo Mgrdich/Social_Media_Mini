@@ -58,6 +58,7 @@ const Experience: React.FC<RouteComponentProps> = (props) => {
                         name="from" control={control}
                         error={"to" in serverError}
                         helperText={("to" in serverError && serverError.to)}
+                        disabled={checked}
                     />
                     <span> Current Job
                         <Checkbox
