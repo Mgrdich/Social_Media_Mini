@@ -56,7 +56,7 @@ const CreateProfile: React.FC<RouteComponentProps> = (props) => {
                     <span> Add Socials
                         <Checkbox
                             checked={checked}
-                            onChange={handleChange}
+                            onChange={(event: React.ChangeEvent<HTMLInputElement>)=>setChecked(event.target.checked)}
                             color="primary"
                             inputProps={{'aria-label': 'primary checkbox'}}
                         />

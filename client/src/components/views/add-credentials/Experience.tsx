@@ -8,20 +8,18 @@ import {useDynamicFields} from "../../Hooks/useDynamicFields";
 import {sanitizeFormValues} from "../../../util/functions";
 import axios from "axios";
 import {URL} from "../../../config/config";
-import {Button} from "@material-ui/core";
+import {Button, Checkbox} from "@material-ui/core";
 import DatePicker from "../../Reusable/DatePicker";
 
 const Experience: React.FC<RouteComponentProps> = (props) => {
     const {handleSubmit, register, errors, unregister, control} = useForm<FormData>();
     const [serverError, setterError] = useServerErrorHandle();
-    // const [checked, setChecked] = React.useState(false); //TODO Change the Checkbox Element with text
+    const [checked, setChecked] = React.useState(false); //TODO Change the Checkbox Element with text with Redux
     useDynamicFields(experienceInputFields, register, unregister);
 
     const onSubmit = function (values: any) {
         const sanitizedValues = sanitizeFormValues(values);
-        console.log(values);
-/*
-        axios.post(`${URL}/profile//experience`, sanitizedValues)
+        axios.post(`${URL}/profile/experience`, sanitizedValues)
             .then(function (res: any) {
                 props.history.push('/dashboard');
             }).catch(function (e: any) {
@@ -30,7 +28,6 @@ const Experience: React.FC<RouteComponentProps> = (props) => {
             }
             setterError(e.response.data.data);
         });
-*/
     };
 
 
@@ -43,8 +40,18 @@ const Experience: React.FC<RouteComponentProps> = (props) => {
                 <form noValidate autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
                     <DynamicFields InputFields={experienceInputFields} register={register} serverError={serverError}
                                    errors={errors} control={control}/>
+
                     <DatePicker format="MM/dd/yyyy" id="From" label="From" defaultDate={new Date()} name="From" control={control}/>
-                    <DatePicker format="MM/dd/yyyy" id="to" label="To" defaultDate={null} name="To" control={control}/>
+                    <DatePicker format="MM/dd/yyyy" id="to" label="To" defaultDate={null} name="To" control={control} disabled={checked}/>
+                    <span> Current Job
+                        <Checkbox
+                            checked={checked}
+                            onChange={(event: React.ChangeEvent<HTMLInputElement>)=>setChecked(event.target.checked)}
+                            color="primary"
+                            inputProps={{'aria-label': 'primary checkbox'}}
+                        />
+                    </span>
+
                     <Button color="primary" variant="contained" size="large" className="submitBtn"
                             type="submit">OK</Button>
                 </form>
