@@ -10,7 +10,7 @@ import {InputField} from "../../../interfaces/General";
 import {RouteComponentProps} from "react-router";
 import {sanitizeFormValues} from "../../../util/functions";
 import axios from "axios";
-
+import {URL} from "../../../config/config";
 
 const EditProfile: React.FC<RouteComponentProps> = (props) => { //TODO should request the profile if none found
     const profile: any = useSelector<any>(state => state.profile.profile);

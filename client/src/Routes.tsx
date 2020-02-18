@@ -10,6 +10,8 @@ import Error from "./components/error";
 import {withClass} from "./components/HOC/withClass";
 import CreateProfile from "./components/views/create-profile";
 import EditProfile from "./components/views/edit-profile";
+import Experience from "./components/views/add-credentials/Experience";
+import Education from "./components/views/add-credentials/Education";
 
 const withLoginRegisterClassName = withClass<RouteComponentProps>("loginRegister");
 const LoginWithClassName = withLoginRegisterClassName(Login);
@@ -19,18 +21,20 @@ const RegisterWithClassName = withLoginRegisterClassName(Register);
 const Routes: React.FC = () => {
     return (
         <Switch>
-            <PrivateRoute exact path="/dashboard" component={Index}/>
+            <PrivateRoute exact path={['/dashboard', '/']} component={Index}/>
             <PrivateRoute exact path="/create-profile" component={CreateProfile}/>
             <PrivateRoute exact path="/edit-profile" component={EditProfile}/>
+            <PrivateRoute exact path="/add-credentials/experience" component={Experience}/>
+            <PrivateRoute exact path="/add-credentials/education" component={Education}/>
 
-            <PublicRoute exact path="/" component={Landing}/>
 
             <PublicRoute exact path="/login" component={LoginWithClassName}/>
             <PublicRoute exact path="/register" component={RegisterWithClassName}/>
 
+            <PublicRoute exact path="/" component={Landing}/>
+
             <Route exact path="/404" component={Error}/>
             <Redirect to="/404"/>
-
         </Switch>
     );
 };

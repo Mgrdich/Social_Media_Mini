@@ -20,11 +20,13 @@ body {
   font-family: 'Cambay', sans-serif;
   font-size: 16px;
   color: #ffa7c4; }
-  body h1 {
-    font-size: 45px; }
-  body a {
-    text-decoration: none;
-    color: inherit; }
+
+body h1 {
+  font-size: 45px; }
+
+body a {
+  text-decoration: none;
+  color: inherit; }
 
 #root {
   min-height: 100%;
@@ -44,8 +46,9 @@ footer.footer {
 
 .navbarRoot {
   flex-grow: 1; }
-  .navbarRoot .navBar .MuiTypography-h6 {
-    padding-top: 6px; }
+
+.navbarRoot .navBar .MuiTypography-h6 {
+  padding-top: 6px; }
 
 .landingPage h1 {
   text-align: center; }
@@ -61,8 +64,9 @@ footer.footer {
   margin-top: 50px;
   display: flex;
   justify-content: center; }
-  .landingPage .registerBtns a:nth-child(2) {
-    margin-left: 10px; }
+
+.landingPage .registerBtns a:nth-child(2) {
+  margin-left: 10px; }
 
 .landingPage .image {
   width: 400px;
@@ -77,20 +81,29 @@ h1 {
 .form {
   margin: 0 auto;
   width: 25%; }
-  .form form {
-    display: flex;
-    flex-direction: column; }
-    .form form .MuiFormControl-root:not(:first-child) {
-      margin-top: 30px; }
-    .form form .submitBtn {
-      margin: 40px 0; }
+
+.form form {
+  display: flex;
+  flex-direction: column; }
+
+.form form .MuiFormControl-root:not(:first-child) {
+  margin-top: 30px; }
+
+.form form .submitBtn {
+  margin: 40px 0; }
+
+.centerText {
+  text-align: center;
+  font-size: 25px; }
 
 .flex {
   display: flex; }
-  .flex.spaceBetween {
-    justify-content: space-between; }
-  .flex.flexGrow {
-    flex-grow: 1; }
+
+.flex.spaceBetween {
+  justify-content: space-between; }
+
+.flex.flexGrow {
+  flex-grow: 1; }
 
 .Loader {
   display: flex;

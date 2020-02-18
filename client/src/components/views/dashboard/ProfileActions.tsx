@@ -8,11 +8,11 @@ const ProfileActions = () => {
             <ButtonLink to="/edit-profile" color="primary" variant="contained" size="large" style={{marginRight:10}}>
                  Edit Profile
             </ButtonLink>
-            <ButtonLink to="/add-experience" color="primary" variant="contained" size="large" style={{marginRight:10}}>
+            <ButtonLink to="/add-credentials/experience" color="primary" variant="contained" size="large" style={{marginRight:10}}>
 
                 Add Experience
             </ButtonLink>
-            <ButtonLink to="/add-education" color="primary" variant="contained" size="large">
+            <ButtonLink to="/add-credentials/education" color="primary" variant="contained" size="large">
                 Add Education
             </ButtonLink>
         </>

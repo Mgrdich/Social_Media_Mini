@@ -5,8 +5,8 @@ import Auth from "../HOC/Auth/Auth";
 
 const Btns:JSX.Element = (
     <div className="registerBtns">
-        <ButtonLink to="/Login" color="primary"  variant="contained" size="large">Login</ButtonLink>
-        <ButtonLink to="/Register" color="primary"  variant="outlined" size="large">Register</ButtonLink>
+        <ButtonLink to="/login" color="primary"  variant="contained" size="large">Login</ButtonLink>
+        <ButtonLink to="/register" color="primary"  variant="outlined" size="large">Register</ButtonLink>
     </div>
 );
 
