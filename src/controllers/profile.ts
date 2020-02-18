@@ -131,7 +131,7 @@ async function createExperience(req: Request, res: Response, next: NextFunction)
         try {
             errorThrower("Validation Failed", 422, errors.mapped());
         } catch (err) {
-            errorCatcher(next, err);
+            return errorCatcher(next, err);
         }
     }
     const {
@@ -171,7 +171,7 @@ async function createEducation(req: Request, res: Response, next: NextFunction):
         try {
             errorThrower("Validation Failed", 422, errors.mapped());
         } catch (err) {
-            errorCatcher(next, err);
+            return errorCatcher(next, err);
         }
     }
     const {

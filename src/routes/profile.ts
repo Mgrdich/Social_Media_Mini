@@ -35,7 +35,7 @@ router.post('/', isAuth(), [
 ], createProfile);
 
 router.post('/experience', isAuth(), [
-    body(['title', 'company'])
+    body(['title', 'company','from'])
         .notEmpty(),
     body('from','Invalid Date')
         .isAfter(),

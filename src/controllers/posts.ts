@@ -12,7 +12,7 @@ async function createPost(req: Request, res: Response, next: NextFunction): Prom
         try {
             errorThrower("Validation Failed", 422, errors.mapped());
         } catch (err) {
-            errorCatcher(next, err);
+            return errorCatcher(next, err);
         }
     }
 
@@ -105,7 +105,7 @@ async function commentPost(req: Request, res: Response, next: NextFunction): Pro
         try {
             errorThrower("Validation Failed", 422, errors.mapped());
         } catch (err) {
-            errorCatcher(next, err);
+            return errorCatcher(next, err);
         }
     }
 
