@@ -18,7 +18,7 @@ const Experience: React.FC<RouteComponentProps> = (props) => {
     const onSubmit = function (values: any) {
         const sanitizedValues = sanitizeFormValues(values);
 
-        axios.post(`${URL}/profile`, sanitizedValues)
+        axios.post(`${URL}/profile//experience`, sanitizedValues)
             .then(function (res: any) {
                 props.history.push('/dashboard');
             }).catch(function (e: any) {
