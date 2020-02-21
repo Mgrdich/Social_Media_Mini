@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {getCurrentProfile} from "../../../action/profileActions";
+import {deleteEducation, deleteExperience, getCurrentProfile} from "../../../action/profileActions";
 import {Container} from "@material-ui/core";
 import ButtonLink from "../../Reusable/ButtonLink";
 import Loader from "../../Reusable/Loader";
@@ -22,11 +22,11 @@ const Index: React.FC = () => {
         dispatch(getCurrentProfile());
     }, [dispatch]);
 
-    const deleteEducation = useCallback(function (id: string) {
+    const deleteMyEducation = useCallback(function (id: string) {
         dispatch(deleteEducation(id));
     }, [dispatch]);
 
-    const deleteExperience = useCallback(function (id: string) {
+    const deleteMyExperience = useCallback(function (id: string) {
         dispatch(deleteExperience(id));
     }, [dispatch]);
 
@@ -46,7 +46,7 @@ const Index: React.FC = () => {
                         tbody={['school', 'degree', 'from', DeleteIcons]}
                         data={profile.education}
                         style={{marginTop: 10}}
-                        actionHandler={deleteEducation}
+                        actionHandler={deleteMyEducation}
                     />
 
                     <DashboardTable
@@ -54,7 +54,7 @@ const Index: React.FC = () => {
                         tbody={['title', 'company', 'from', DeleteIcons]}
                         data={profile.experience}
                         style={{marginTop: 10}}
-                        actionHandler={deleteEducation}
+                        actionHandler={deleteMyExperience}
                     />
 
                 </>

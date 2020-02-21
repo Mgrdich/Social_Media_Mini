@@ -208,6 +208,7 @@ async function createEducation(req: Request, res: Response, next: NextFunction):
 
 async function deleteExperience(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
+
         const updatedProfile: IDocProfile = await Profile
             .updateOne({user: req.user["_id"]}, {$pull: {experience: {_id: req.params.Id}}}, {multi: true, new: true});
         if (!updatedProfile) {

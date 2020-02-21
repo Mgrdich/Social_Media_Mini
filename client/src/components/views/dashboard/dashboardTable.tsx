@@ -7,7 +7,7 @@ interface IDashboardTable {
     tbody: Array<string | JSX.Element>;
     data: Array<any>;
     style: any;
-    actionHandler?: Function; //should be array in the Future
+    actionHandler?: any; //should be array in the Future
 }
 
 const DashboardTable: React.FC<IDashboardTable> = (props) => {
@@ -35,7 +35,7 @@ const DashboardTable: React.FC<IDashboardTable> = (props) => {
                                         return (
                                             <TableCell
                                                 align="center"
-                                                onClick={() => (props.actionHandler) ? props.actionHandler(item._id) : null}
+                                                onClick={() => (props.actionHandler) ? props.actionHandler(row._id) : null}
                                                 key={index}
                                             >{item}</TableCell>
                                         );
