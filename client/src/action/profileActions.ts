@@ -28,7 +28,7 @@ export const getCurrentProfile: ActionCreator<ThunkAction<void, any, null, AnyAc
 };
 
 // Delete Experience
-export const deleteExperience:ActionCreator<ThunkAction<void, any, string, AnyAction>> = (id) => (dispatch) => {
+export const deleteExperience:ActionCreator<ThunkAction<void, any, null, AnyAction>> = (id) => (dispatch) => {
     axios
         .delete(`${URL}/profile/experience/${id}`)
         .then(res =>

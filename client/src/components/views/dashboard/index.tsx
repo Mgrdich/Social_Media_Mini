@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {getCurrentProfile} from "../../../action/profileActions";
-import {Button, Container} from "@material-ui/core";
+import {Container} from "@material-ui/core";
 import ButtonLink from "../../Reusable/ButtonLink";
 import Loader from "../../Reusable/Loader";
 import {Link} from "react-router-dom";
@@ -22,13 +22,13 @@ const Index: React.FC = () => {
         dispatch(getCurrentProfile());
     }, [dispatch]);
 
-    const deleteEducation = useCallback(function () {
+    const deleteEducation = useCallback(function (id: string) {
+        dispatch(deleteEducation(id));
+    }, [dispatch]);
 
-    },[dispatch]);
-
-    const deleteExperience = useCallback(function () {
-
-    },[dispatch]);
+    const deleteExperience = useCallback(function (id: string) {
+        dispatch(deleteExperience(id));
+    }, [dispatch]);
 
 
     if (isLoading || profile === null) {
@@ -44,17 +44,17 @@ const Index: React.FC = () => {
                     <DashboardTable
                         thead={['School', 'Degree', 'Years', '']}
                         tbody={['school', 'degree', 'from', DeleteIcons]}
-                        actions={[false,false,false,]}
                         data={profile.education}
                         style={{marginTop: 10}}
+                        actionHandler={deleteEducation}
                     />
 
                     <DashboardTable
                         thead={['Title', 'Company', 'Date', '']}
                         tbody={['title', 'company', 'from', DeleteIcons]}
-                        actions={[false,false,false,]}
                         data={profile.experience}
                         style={{marginTop: 10}}
+                        actionHandler={deleteEducation}
                     />
 
                 </>
