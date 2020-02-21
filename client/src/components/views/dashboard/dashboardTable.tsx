@@ -1,11 +1,13 @@
 import React from 'react';
-import {Paper, Table, TableCell, TableContainer, TableHead, TableRow} from "@material-ui/core";
+import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@material-ui/core";
+
 
 interface IDashboardTable {
     thead: Array<string>;
-    tbody: Array<string>;
+    tbody: Array<string|JSX.Element>;
     data: Array<any>;
     style: any;
+    actions:Array<Function | false>;
 }
 
 const DashboardTable: React.FC<IDashboardTable> = (props) => {
@@ -22,15 +24,23 @@ const DashboardTable: React.FC<IDashboardTable> = (props) => {
                             })}
                         </TableRow>
                     </TableHead>
-                    {props.data.map((row) => (
-                        <TableRow key={row._id}>
-                            {
-                                props.tbody.map((item: string, index: number) => {
-                                    return (<TableCell align="center">{row[item]}</TableCell>)
-                                })
-                            }
-                        </TableRow>
-                    ))}
+                    <TableBody>
+                        {props.data.map((row) => (
+                            <TableRow key={row._id}>
+                                {
+                                    props.tbody.map((item: string | any, index: number) => {
+                                        if (typeof item === 'string') {
+                                            return (<TableCell align="center" key={index}>{row[item]}</TableCell>)
+                                        } else {
+                                            return (
+                                                <TableCell align="center">{item}</TableCell>
+                                            );
+                                        }
+                                    })
+                                }
+                            </TableRow>
+                        ))}
+                    </TableBody>
                 </Table>
             </TableContainer>
         </>

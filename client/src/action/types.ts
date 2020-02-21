@@ -4,4 +4,5 @@ export const GET_PROFILE: string = "GET_PROFILE";
 export const PROFILE_LOADING: string = "PROFILE_LOADING";
 export const CLEAR_CURRENT_PROFILE: string = "CLEAR_CURRENT_PROFILE";
 export const GET_PROFILES: string = "GET_PROFILES";
+export const GET_ERRORS:string = "GET_ERRORS";
 
