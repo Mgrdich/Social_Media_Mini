@@ -97,13 +97,32 @@ export const getProfiles: ActionCreator<ThunkAction<void, any, null, AnyAction>>
     dispatch(setProfileLoading());
     axios.get('/profile/all')
         .then(res =>
-                dispatch({
+            dispatch({
                 type: GET_PROFILES,
                 payload: res.data
             })
         ).catch(err =>
+        dispatch({
+            type: GET_PROFILES,
+            payload: null
+        })
+    );
+};
+
+// Get profile by handle
+export const getProfileByHandle: ActionCreator<ThunkAction<void, any, null, AnyAction>> = handle => dispatch => {
+    dispatch(setProfileLoading());
+    axios
+        .get(`/profile/handle/${handle}`)
+        .then(res =>
             dispatch({
-                type: GET_PROFILES,
+                type: GET_PROFILE,
+                payload: res.data
+            })
+        )
+        .catch(err =>
+            dispatch({
+                type: GET_PROFILE,
                 payload: null
             })
         );
