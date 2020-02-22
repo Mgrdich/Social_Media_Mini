@@ -1,5 +1,5 @@
 import React from 'react';
-import {ThemeProvider} from '@material-ui/core'; //TODO check performance
+import {Container, ThemeProvider} from '@material-ui/core'; //TODO check performance
 import {theme} from "./Theme";
 import {Router} from "react-router-dom";
 import HeaderFooterLayout from "./components/HOC/HeaderFooterLayout";
@@ -38,7 +38,9 @@ const App: React.FC = () => {
             <Router history={history}>
                 <ThemeProvider theme={theme}>
                     <HeaderFooterLayout>
-                        <Routes/>
+                        <Container>
+                            <Routes/>
+                        </Container>
                     </HeaderFooterLayout>
                 </ThemeProvider>
             </Router>

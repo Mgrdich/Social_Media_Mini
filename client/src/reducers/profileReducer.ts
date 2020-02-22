@@ -1,4 +1,4 @@
-import {CLEAR_CURRENT_PROFILE, GET_PROFILE, PROFILE_LOADING} from "../action/types";
+import {CLEAR_CURRENT_PROFILE, GET_PROFILE, GET_PROFILES, PROFILE_LOADING} from "../action/types";
 
 export interface IProfileReducer {
     profile: any;
@@ -27,6 +27,12 @@ export default function (state: IProfileReducer = initialState, action: any) {
                 profile: (action.payload) ? action.payload : {},
                 loading: false,
                 errMessage: action.errMessage
+            };
+        case GET_PROFILES:
+            return {
+                ...state,
+                profiles: action.payload,
+                loading: false
             };
         case CLEAR_CURRENT_PROFILE:
             return {

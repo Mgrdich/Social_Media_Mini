@@ -1,13 +1,14 @@
 import React, {useCallback, useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {deleteEducation, deleteExperience, getCurrentProfile} from "../../../action/profileActions";
-import {Container} from "@material-ui/core";
+import {deleteAccount, deleteEducation, deleteExperience, getCurrentProfile} from "../../../action/profileActions";
+import {Button, Container} from "@material-ui/core";
 import ButtonLink from "../../Reusable/ButtonLink";
 import Loader from "../../Reusable/Loader";
 import {Link} from "react-router-dom";
 import ProfileActions from "./ProfileActions";
 import DashboardTable from "./dashboardTable";
 import DeleteIcon from '@material-ui/icons/Delete';
+
 
 const DeleteIcons: JSX.Element = <DeleteIcon color="primary"/>;
 
@@ -28,6 +29,10 @@ const Index: React.FC = () => {
 
     const deleteMyExperience = useCallback(function (id: string) {
         dispatch(deleteExperience(id));
+    }, [dispatch]);
+
+    const deleteMyProfile = useCallback(function () {
+        dispatch(deleteAccount());
     }, [dispatch]);
 
 
@@ -56,16 +61,26 @@ const Index: React.FC = () => {
                         style={{marginTop: 10}}
                         actionHandler={deleteMyExperience}
                     />
-
+                    <Button
+                        color="primary"
+                        variant="contained"
+                        style={{marginTop: 10}}
+                        onClick={() => deleteMyProfile()}
+                    >delete Profile</Button>
                 </>
             );
         } else {
             dashboardContent = (
                 <div>
-                    <p className="lead text-muted">Welcome {user.name}</p>
+                    <p className="lead text-muted">Welcome <Link to="">{user.name}</Link></p>
                     <p>You have not yet setup a profile, please add some info</p>
-                    <ButtonLink color="primary" variant="contained" size="large" to='/create-profile'>Create
-                        Link</ButtonLink>
+                    <ButtonLink
+                        color="primary"
+                        variant="contained"
+                        size="large"
+                        to='/create-profile'>
+                        Create Link
+                    </ButtonLink>
                 </div>
             )
         }

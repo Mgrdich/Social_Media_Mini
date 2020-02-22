@@ -21,10 +21,6 @@ const CreateProfile: React.FC<RouteComponentProps> = (props) => {
     const [checked, setChecked] = React.useState(false); //TODO Change the Checkbox Element with text
     useDynamicFields(InputFields, register, unregister);
 
-    const handleChange = function (event: React.ChangeEvent<HTMLInputElement>) {
-        setChecked(event.target.checked);
-    };
-
     const onSubmit = function (values: any) {
         const sanitizedValues = sanitizeFormValues(values);
 
@@ -61,8 +57,14 @@ const CreateProfile: React.FC<RouteComponentProps> = (props) => {
                             inputProps={{'aria-label': 'primary checkbox'}}
                         />
                     </span>
-                    <Button color="primary" variant="contained" size="large" className="submitBtn"
-                            type="submit">OK</Button>
+                    <Button
+                        color="primary"
+                        variant="contained"
+                        size="large"
+                        className="submitBtn"
+                        type="submit">
+                        OK
+                    </Button>
                 </form>
             </div>
         </>

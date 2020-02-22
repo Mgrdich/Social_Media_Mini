@@ -1,4 +1,4 @@
-import {CLEAR_CURRENT_PROFILE, GET_ERRORS, GET_PROFILE, PROFILE_LOADING} from "./types";
+import {CLEAR_CURRENT_PROFILE, GET_ERRORS, GET_PROFILE, GET_PROFILES, PROFILE_LOADING, SET_CURRENT_USER} from "./types";
 import {Action, ActionCreator, AnyAction, Dispatch} from "redux";
 import axios, {AxiosResponse} from "axios";
 import {URL} from "../config/config";
@@ -70,6 +70,43 @@ export const deleteEducation: ActionCreator<ThunkAction<void, any, null, AnyActi
             payload: err.response.data
         })
     );
+};
+
+// Delete account & profile
+export const deleteAccount: ActionCreator<ThunkAction<void, any, null, AnyAction>> = () => (dispatch) => {
+    if (window.confirm('Are you sure? This can NOT be undone!')) {
+        axios
+            .delete('/profile')
+            .then(res =>
+                dispatch({
+                    type: SET_CURRENT_USER,
+                    payload: {}
+                })
+            ).catch(err => {
+                console.log(err);
+                dispatch({
+                    type: GET_ERRORS,
+                    payload: err
+                })
+            }
+        );
+    }
+};
+
+export const getProfiles: ActionCreator<ThunkAction<void, any, null, AnyAction>> = () => dispatch => {
+    dispatch(setProfileLoading());
+    axios.get('/profile/all')
+        .then(res =>
+                dispatch({
+                type: GET_PROFILES,
+                payload: res.data
+            })
+        ).catch(err =>
+            dispatch({
+                type: GET_PROFILES,
+                payload: null
+            })
+        );
 };
 
 
