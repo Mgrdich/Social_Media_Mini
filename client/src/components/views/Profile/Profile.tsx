@@ -3,6 +3,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router";
 import {getProfileByHandle} from "../../../action/profileActions";
 import Loader from "../../Reusable/Loader";
+import {Box, Container} from "@material-ui/core";
+import ProfileAbout from "./ProfileAbout";
 
 type handle = {
     handle: string;
@@ -20,6 +22,11 @@ const Profile: React.FC = () => {
         return (
             <>
                 <h1>{profile.user.name} Profile</h1>
+                <Container maxWidth="xl">
+                    <Box display="flex" justifyContent="center" alignContent="center">
+                        <ProfileAbout profile={profile}/>
+                    </Box>
+                </Container>
             </>
         );
     } else {

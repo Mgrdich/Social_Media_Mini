@@ -1,12 +1,22 @@
-import React from 'react';
-import {Avatar, Card, CardContent, CardHeader} from "@material-ui/core";
-import ButtonLink from "../../Reusable/ButtonLink";
+import React, {useCallback} from 'react';
+import {Avatar, Button, Card, CardContent, CardHeader} from "@material-ui/core";
+import {useHistory} from "react-router";
+import {useDispatch} from "react-redux";
+import {setProfileLoading} from "../../../action/profileActions";
 
 interface IProfileItems {
     profile: any;
 }
 
+
 const ProfileItems: React.FC<IProfileItems> = ({profile}) => {
+    const history = useHistory();
+    const dispatch = useDispatch();
+
+    const toProfile = useCallback(function () {
+        dispatch(setProfileLoading());
+        history.push(`/profile/${profile.handle}`);
+    }, [history, dispatch]);
 
     return (
         <Card>
@@ -20,7 +30,7 @@ const ProfileItems: React.FC<IProfileItems> = ({profile}) => {
                 subheader={(profile.user.status) ? profile.user.status : ''}
             />
             <CardContent>
-                <ButtonLink to={`/profile/${profile.handle}`} color="primary" variant="outlined">See my Profile</ButtonLink>
+                <Button onClick={toProfile} color="primary" variant="outlined">See my Profile</Button>
             </CardContent>
         </Card>
 
