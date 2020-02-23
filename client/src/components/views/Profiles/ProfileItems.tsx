@@ -20,7 +20,7 @@ const ProfileItems: React.FC<IProfileItems> = ({profile}) => {
                 subheader={(profile.user.status) ? profile.user.status : ''}
             />
             <CardContent>
-                <ButtonLink to={`/profile/${profile.user.handle}`} color="primary" variant="outlined">See my Profile</ButtonLink>
+                <ButtonLink to={`/profile/${profile.handle}`} color="primary" variant="outlined">See my Profile</ButtonLink>
             </CardContent>
         </Card>
 

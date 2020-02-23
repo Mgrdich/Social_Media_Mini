@@ -7,19 +7,19 @@ import Loader from "../../Reusable/Loader";
 type handle = {
     handle: string;
 }
-const Profile = () => {
+const Profile: React.FC = () => {
     const dispatch = useDispatch();
     const param = useParams<handle>();
-    const profile: any = useSelector<any>(state => state.profile);
+    const {profile, loading}: any = useSelector<any>(state => state.profile);
 
     useEffect(function () {
         dispatch(getProfileByHandle(param.handle))
     }, [dispatch]);
-    console.log(profile);
-    if (!profile.loading) {
+
+    if (!loading) { //TODO could be replace by HOC
         return (
             <>
-                <h1>{profile.profile.user.name} Profile</h1>
+                <h1>{profile.user.name} Profile</h1>
             </>
         );
     } else {

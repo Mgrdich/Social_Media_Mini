@@ -10,7 +10,7 @@ export interface IProfileReducer {
 const initialState: IProfileReducer = {
     profile: {},
     profiles: [],
-    loading: false,
+    loading: true,
     errMessage: ''
 };
 

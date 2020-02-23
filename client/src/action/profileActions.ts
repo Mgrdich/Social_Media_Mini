@@ -111,7 +111,9 @@ export const getProfiles: ActionCreator<ThunkAction<void, any, null, AnyAction>>
 
 // Get profile by handle
 export const getProfileByHandle: ActionCreator<ThunkAction<void, any, null, AnyAction>> = handle => dispatch => {
+
     dispatch(setProfileLoading());
+
     axios
         .get(`/profile/handle/${handle}`)
         .then(res =>

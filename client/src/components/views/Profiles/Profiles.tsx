@@ -17,7 +17,11 @@ const Profiles: React.FC = () => {
         <Grid container spacing={3} style={{marginTop: 62}}>
             {
                 (profiles.length) ? profiles.map((item: any, index: number) => {
-                    return <Grid key={index} item xs={12} sm={6} md={4} lg={3}><ProfileItems profile={item}/></Grid>
+                    return (
+                        <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
+                            <ProfileItems profile={item}/>
+                        </Grid>
+                    )
                 }) : <h2>No Profiles yet</h2>
             }
         </Grid>
