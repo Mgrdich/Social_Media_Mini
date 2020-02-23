@@ -14,6 +14,7 @@ import Experience from "./components/views/add-credentials/Experience";
 import Education from "./components/views/add-credentials/Education";
 import Profiles from "./components/views/Profiles/Profiles";
 import Profile from "./components/views/Profile/Profile";
+import Posts from "./components/views/posts";
 
 const withLoginRegisterClassName = withClass<RouteComponentProps>("loginRegister");
 const LoginWithClassName = withLoginRegisterClassName(Login);
@@ -35,6 +36,7 @@ const Routes: React.FC = () => {
 
             <PublicRoute exact path="/" component={Landing}/>
 
+            <Route exact path="/feed" component={Posts}/>
             <Route exact path="/profiles" component={Profiles}/>
             <Route exact path="/profile/:handle" component={Profile}/>
             <Route exact path="/404" component={Error}/>
