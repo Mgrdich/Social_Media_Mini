@@ -41,8 +41,8 @@ const PostForm = () => {
                     variant="outlined"
                     color="primary"
                     inputRef={register({
-                        required: "This Field is Required"
-                    })}
+                            required: "This Field is Required"
+                        })}
                     rows={4}
                     error={!!errors.post || "post" in serverError}
                     helperText={(!!errors.post && errors.post.message) || ("post" in serverError && serverError.post)}
