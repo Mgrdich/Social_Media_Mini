@@ -1,5 +1,5 @@
 import React from 'react';
-import {TextField} from "@material-ui/core";
+import {Button, TextField} from "@material-ui/core";
 import {useForm} from "react-hook-form";
 import {useServerErrorHandle} from "../../Hooks/useServerErrorHandle";
 import axios from "axios";
@@ -31,8 +31,10 @@ const PostForm = () => {
 
     return (
         <>
-            <form noValidate autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
+            <form noValidate autoComplete="off" style={{width: '100%', marginTop: 50}}
+                  onSubmit={handleSubmit(onSubmit)}>
                 <TextField
+                    style={{width: '100%'}}
                     id="post"
                     name="post"
                     label="Post"
@@ -44,8 +46,9 @@ const PostForm = () => {
                     rows={4}
                     error={!!errors.post || "post" in serverError}
                     helperText={(!!errors.post && errors.post.message) || ("post" in serverError && serverError.post)}
-
                 />
+                <Button color="primary" variant="contained" size="large"
+                        style={{marginTop: 10, display: "block", width: '100%'}}>Post</Button>
             </form>
         </>
     );
