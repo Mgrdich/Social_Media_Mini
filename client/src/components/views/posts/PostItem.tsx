@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PostItem = () => {
+const PostItem:React.FC = () => {
     return (
         <>
 

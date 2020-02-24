@@ -8,11 +8,11 @@ import {useDispatch} from "react-redux";
 import {addPost} from "../../../action/postActions";
 
 type FormData = {
-    post: string;
+    text: string;
 }
 
 
-const PostForm = () => {
+const PostForm:React.FC = () => {
     const {handleSubmit, register, errors} = useForm<FormData>();
     const [serverError, setterError] = useServerErrorHandle();
     const dispatch = useDispatch();
@@ -28,15 +28,14 @@ const PostForm = () => {
             setterError(e.response.data);
         });
     };
-
     return (
         <>
             <form noValidate autoComplete="off" style={{width: '100%', marginTop: 50}}
                   onSubmit={handleSubmit(onSubmit)}>
                 <TextField
                     style={{width: '100%'}}
-                    id="post"
-                    name="post"
+                    id="text"
+                    name="text"
                     label="Post"
                     variant="outlined"
                     color="primary"
@@ -44,10 +43,10 @@ const PostForm = () => {
                             required: "This Field is Required"
                         })}
                     rows={4}
-                    error={!!errors.post || "post" in serverError}
-                    helperText={(!!errors.post && errors.post.message) || ("post" in serverError && serverError.post)}
+                    error={!!errors.text || "text" in serverError}
+                    helperText={(!!errors.text && errors.text.message) || ("text" in serverError && serverError.text)}
                 />
-                <Button color="primary" variant="contained" size="large"
+                <Button type="submit" color="primary" variant="contained" size="large"
                         style={{marginTop: 10, display: "block", width: '100%'}}>Post</Button>
             </form>
         </>

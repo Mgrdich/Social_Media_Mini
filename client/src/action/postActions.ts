@@ -17,7 +17,7 @@ export const addPost: ActionCreator<Action> = postData => {
 export const getPosts: action = () => dispatch => {
     dispatch(setPostLoading());
     axios
-        .get('/api/posts')
+        .get('/posts')
         .then((res: AxiosResponse) =>
             dispatch({
                 type: GET_POSTS,
@@ -35,7 +35,7 @@ export const getPosts: action = () => dispatch => {
 export const getPost: action = id => dispatch => {
     dispatch(setPostLoading());
     axios
-        .get(`/api/posts/${id}`)
+        .get(`/posts/${id}`)
         .then((res: AxiosResponse) =>
             dispatch({
                 type: GET_POST,
@@ -52,7 +52,7 @@ export const getPost: action = id => dispatch => {
 // Delete Post
 export const deletePost: action = id => dispatch => {
     axios
-        .delete(`/api/posts/${id}`)
+        .delete(`/posts/${id}`)
         .then((res: AxiosResponse) =>
             dispatch({
                 type: DELETE_POST,
@@ -69,7 +69,7 @@ export const deletePost: action = id => dispatch => {
 // Add Like
 export const addLike: action = id => dispatch => {
     axios
-        .post(`/api/posts/like/${id}`)
+        .post(`/posts/like/${id}`)
         .then((res: AxiosResponse) => dispatch(getPosts())).catch((err: any) =>
         dispatch({
             type: GET_ERRORS,
@@ -81,7 +81,7 @@ export const addLike: action = id => dispatch => {
 // Remove Like
 export const removeLike: action = id => dispatch => {
     axios
-        .post(`/api/posts/unlike/${id}`)
+        .post(`/posts/unlike/${id}`)
         .then((res: AxiosResponse) => dispatch(getPosts())).catch((err: any) =>
         dispatch({
             type: GET_ERRORS,
@@ -94,7 +94,7 @@ export const removeLike: action = id => dispatch => {
 export const addComment: action = (postId, commentData) => dispatch => {
     dispatch(clearErrors());
     axios
-        .post(`/api/posts/comment/${postId}`, commentData)
+        .post(`/posts/comment/${postId}`, commentData)
         .then((res: AxiosResponse) =>
             dispatch({
                 type: GET_POST,
@@ -111,7 +111,7 @@ export const addComment: action = (postId, commentData) => dispatch => {
 // Delete Comment
 export const deleteComment: action = (postId, commentId) => dispatch => {
     axios
-        .delete(`/api/posts/comment/${postId}/${commentId}`)
+        .delete(`/posts/comment/${postId}/${commentId}`)
         .then((res: AxiosResponse) =>
             dispatch({
                 type: GET_POST,
