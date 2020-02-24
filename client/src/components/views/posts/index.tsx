@@ -2,6 +2,10 @@ import React from 'react';
 import PostForm from "./PostForm";
 import {Box, Container} from "@material-ui/core";
 import PostFeed from "./PostFeed";
+import {Authorization} from "../../HOC/Auth/AuthorizationComp";
+
+const PostFormAuth =  Authorization()(PostForm);
+
 
 const Posts:React.FC = () => {
     return (
@@ -11,7 +15,7 @@ const Posts:React.FC = () => {
 
                     <PostFeed/>
 
-                    <PostForm/>
+                    <PostFormAuth/>
                 </Box>
             </Container>
         </>

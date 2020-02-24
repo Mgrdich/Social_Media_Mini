@@ -10,7 +10,7 @@ export function Authorization<P extends object>(allowedRoles?: Array<string>) { 
             const isAuth = useSelector<any>(state => state.auth.isAuthenticated);
             const role = useSelector<any>(state => state.auth.user.role);
 
-            if (isAuth && allowedRoles && allowedRoles.includes(role as string)) {
+            if ((isAuth && allowedRoles && allowedRoles.includes(role as string)) || typeof allowedRoles==='undefined') {
                 return <WrappedComponent {...props as P}/>
             } else {
                 return <></>

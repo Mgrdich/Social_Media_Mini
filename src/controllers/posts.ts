@@ -36,7 +36,7 @@ async function createPost(req: Request, res: Response, next: NextFunction): Prom
 async function getPosts(req: Request, res: Response, next: NextFunction): Promise<any> {
 
     try {
-        const posts: Array<IDocPost> = await Post.find().sort({date: -1});
+        const posts: Array<IDocPost> = await Post.find().sort({date: -1}).populate('user', ['name', 'avatar']);
         res.status(200).json(posts);
     } catch (err) {
         errorCatcher(next, err);
