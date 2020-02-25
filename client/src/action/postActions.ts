@@ -6,7 +6,7 @@ import {ThunkAction} from "redux-thunk";
 
 type action = ActionCreator<ThunkAction<void, any, null, AnyAction>>;
 
-export const addPost: ActionCreator<Action> = postData => {
+export const addPost: action = postData => dispatch => {
     return {
         type: ADD_POST,
         payload: postData.data
@@ -23,11 +23,15 @@ export const getPosts: action = () => dispatch => {
                 type: GET_POSTS,
                 payload: res.data
             })
-        ).catch((err: any) =>
+        ).catch((err: any) => {
+            console.log(err);
+        }
+/*
         dispatch({
             type: GET_POSTS,
             payload: null
         })
+*/
     );
 };
 

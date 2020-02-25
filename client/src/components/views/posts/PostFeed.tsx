@@ -14,7 +14,9 @@ const PostFeed: React.FC = () => {
     return (
         <>
             <div style={{marginTop: 10}}>
-                {posts.map((item:any,index:number) => (
+                {posts.length ? (posts.map((item:any,index:number) => {
+                    console.log(item);
+                    return(
                     <Card key={item._id} style={{marginTop: 10}}>
                         <CardHeader
                             avatar={
@@ -29,7 +31,7 @@ const PostFeed: React.FC = () => {
                             <p>{item.text}</p>
                         </CardContent>
                     </Card>
-                ))
+                )})):null
                 }
             </div>
         </>

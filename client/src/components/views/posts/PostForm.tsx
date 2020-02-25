@@ -22,10 +22,10 @@ const PostForm:React.FC = () => {
             .then(function (res: any) {
                 dispatch(addPost(res));
             }).catch(function (e: any) {
-            if (!e.response.data) {
+            if (!e.response && !e.response.data )  {
                 console.error("No Response is found");
             }
-            setterError(e.response.data);
+            setterError(e.response.data.data);
         });
     };
     return (

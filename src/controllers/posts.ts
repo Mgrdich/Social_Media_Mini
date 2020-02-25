@@ -16,17 +16,15 @@ async function createPost(req: Request, res: Response, next: NextFunction): Prom
         }
     }
 
-    const {text, name, avatar} = req.body;
+    const {text} = req.body;
 
     const newPost: IDocPost = new Post({
         text,
-        name,
-        avatar,
         user: req.user["_id"]
     });
     try {
         const post: IPost = await newPost.save();
-        res.status(200).json(post);
+        res.status(200).json(post);//TODO here should be populated
     } catch (err) {
         errorCatcher(next, err);
     }
@@ -47,7 +45,8 @@ async function getPosts(req: Request, res: Response, next: NextFunction): Promis
 async function getPost(req: Request, res: Response, next: NextFunction): Promise<any> {
 
     try {
-        const post: IPost = await Post.findById(req.params.Id);
+        const post: IPost = await Post.findById(req.params.Id).populate('user', ['name', 'avatar']);
+        res.status(200).json(post);
     } catch (err) {
         errorCatcher(next, err);
     }
